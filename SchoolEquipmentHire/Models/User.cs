@@ -9,7 +9,6 @@
 
         public RoleType Role { get; set; }
 
-        public ICollection<Enrollment> Enrollments { get; set; }
     }
 
     public enum RoleType

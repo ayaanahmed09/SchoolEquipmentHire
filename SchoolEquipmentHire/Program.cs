@@ -1,4 +1,8 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<SchoolEquipmentContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SchoolEquipmentContext") ?? throw new InvalidOperationException("Connection string 'SchoolEquipmentContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
