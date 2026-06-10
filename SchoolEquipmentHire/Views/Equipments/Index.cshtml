@@ -1,10 +1,10 @@
-﻿@model IEnumerable<SchoolEquipmentHire.Models.User>
+﻿@model IEnumerable<SchoolEquipmentHire.Models.Equipment>
 
 @{
-    ViewData["Title"] = "Users";
+    ViewData["Title"] = "Equipments";
 }
 
-<h1>Users</h1>
+<h1>Equipments</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,16 +13,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.LastName)
+                @Html.DisplayNameFor(model => model.CategoryID)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FirstMidName)
+                @Html.DisplayNameFor(model => model.EquipmentName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.YearLevel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Role)
+                @Html.DisplayNameFor(model => model.Quantity)
             </th>
             <th></th>
         </tr>
@@ -31,16 +28,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.LastName)
+                @Html.DisplayFor(modelItem => item.CategoryID)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FirstMidName)
+                @Html.DisplayFor(modelItem => item.EquipmentName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.YearLevel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Role)
+                @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |

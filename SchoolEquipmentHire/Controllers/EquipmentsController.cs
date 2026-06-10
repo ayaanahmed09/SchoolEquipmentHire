@@ -7,64 +7,59 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SchoolEquipmentHire.Models;
 
-namespace SchoolEquipmentHire
+namespace SchoolEquipmentHire.Controllers
 {
-    public class UsersController : Controller
+    public class EquipmentsController : Controller
     {
         private readonly SchoolEquipmentContext _context;
 
-        public UsersController(SchoolEquipmentContext context)
+        public EquipmentsController(SchoolEquipmentContext context)
         {
             _context = context;
         }
 
-        // GET: Users
-        public async Task<IActionResult> Index()
+        // GET: Equipments
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.User.ToListAsync());
-        }
-
-        // GET: Users/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
+            if (_context.Equipment == null)
             {
-                return NotFound();
+                return Problem("Entity set 'SchoolEquipmentContext.Movie'  is null.");
             }
 
-            var user = await _context.User
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (user == null)
+            var equipments = from e in _context.Equipment
+                         select e;
+
+            if (!String.IsNullOrEmpty(searchString))
             {
-                return NotFound();
+                equipments = equipments.Where(s => s.Title!.ToUpper().Contains(searchString.ToUpper()));
             }
 
-            return View(user);
+            return View(await equipments.ToListAsync());
         }
 
-        // GET: Users/Create
+        // GET: Equipments/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Users/Create
+        // POST: Equipments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,LastName,FirstMidName,YearLevel,Role")] User user)
+        public async Task<IActionResult> Create([Bind("ID,CategoryID,EquipmentName,Quantity")] Equipment equipment)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
+                _context.Add(equipment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(equipment);
         }
 
-        // GET: Users/Edit/5
+        // GET: Equipments/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -72,22 +67,22 @@ namespace SchoolEquipmentHire
                 return NotFound();
             }
 
-            var user = await _context.User.FindAsync(id);
-            if (user == null)
+            var equipment = await _context.Equipment.FindAsync(id);
+            if (equipment == null)
             {
                 return NotFound();
             }
-            return View(user);
+            return View(equipment);
         }
 
-        // POST: Users/Edit/5
+        // POST: Equipments/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,LastName,FirstMidName,YearLevel,Role")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,CategoryID,EquipmentName,Quantity")] Equipment equipment)
         {
-            if (id != user.ID)
+            if (id != equipment.ID)
             {
                 return NotFound();
             }
@@ -96,12 +91,12 @@ namespace SchoolEquipmentHire
             {
                 try
                 {
-                    _context.Update(user);
+                    _context.Update(equipment);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!UserExists(user.ID))
+                    if (!EquipmentExists(equipment.ID))
                     {
                         return NotFound();
                     }
@@ -112,10 +107,10 @@ namespace SchoolEquipmentHire
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(user);
+            return View(equipment);
         }
 
-        // GET: Users/Delete/5
+        // GET: Equipments/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,34 +118,34 @@ namespace SchoolEquipmentHire
                 return NotFound();
             }
 
-            var user = await _context.User
+            var equipment = await _context.Equipment
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (user == null)
+            if (equipment == null)
             {
                 return NotFound();
             }
 
-            return View(user);
+            return View(equipment);
         }
 
-        // POST: Users/Delete/5
+        // POST: Equipments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var user = await _context.User.FindAsync(id);
-            if (user != null)
+            var equipment = await _context.Equipment.FindAsync(id);
+            if (equipment != null)
             {
-                _context.User.Remove(user);
+                _context.Equipment.Remove(equipment);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool UserExists(int id)
+        private bool EquipmentExists(int id)
         {
-            return _context.User.Any(e => e.ID == id);
+            return _context.Equipment.Any(e => e.ID == id);
         }
     }
 }

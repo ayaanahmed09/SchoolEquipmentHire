@@ -13,4 +13,10 @@ using SchoolEquipmentHire.Models;
         }
 
         public DbSet<SchoolEquipmentHire.Models.User> User { get; set; } = default!;
+
+public DbSet<SchoolEquipmentHire.Models.Booking> Booking { get; set; } = default!;
+
+public DbSet<SchoolEquipmentHire.Models.Equipment> Equipment { get; set; } = default!;
+
+public DbSet<SchoolEquipmentHire.Models.Category> Category { get; set; } = default!;
     }
