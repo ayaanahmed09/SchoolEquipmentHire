@@ -21,37 +21,75 @@ namespace SchoolEquipmentHire.Data
                     {
                         EquipmentName = "Football",
                         Quantity = 5,
-                        CategoryID = 1
+                        Category = "Ball",
                     },
                     new Equipment
                     {
                         EquipmentName = "Basketball",
                         Quantity = 10,
-                        CategoryID = 2
+                        Category = "Ball",
                     },
                     new Equipment
                     {
                         EquipmentName = "Cone",
                         Quantity = 15,
-                        CategoryID = 3
+                        Category = "Other",
                     },
                     new Equipment
                     {
                         EquipmentName = "Tennis Ball",
                         Quantity = 20,
-                        CategoryID = 4
+                        Category = "Ball",
                     },
                     new Equipment
                     {
                         EquipmentName = "Badmminton Racket",
                         Quantity = 5,
-                        CategoryID = 5
+                        Category = "Racket",
                     },
                     new Equipment
                     {
                         EquipmentName = "Table Tennis Racket",
                         Quantity = 10,
-                        CategoryID = 6
+                        Category = "Racket",
+                    }
+                );
+
+                // Look for any categories.
+                if (context.Equipment.Any())
+                {
+                    return;   // DB has been seeded
+                }
+                context.Category.AddRange(
+                    new Category
+                    {
+                        CategoryName = "Ball",
+                        ID = 1,
+                    },
+                    new Category
+                    {
+                        CategoryName = "Ball",
+                        ID = 1,
+                    },
+                    new Category
+                    {
+                        CategoryName = "Cone",
+                        ID = 2,
+                    },
+                    new Category
+                    {
+                        CategoryName = "Ball",
+                        ID = 1,
+                    },
+                    new Category
+                    {
+                        CategoryName = "Racket",
+                        ID = 3,
+                    },
+                    new Category
+                    {
+                        CategoryName = "Racket",
+                        ID = 3,
                     }
                 );
                 context.SaveChanges();

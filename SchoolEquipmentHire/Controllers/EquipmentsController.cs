@@ -31,7 +31,7 @@ namespace SchoolEquipmentHire.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                equipments = equipments.Where(s => s.Title!.ToUpper().Contains(searchString.ToUpper()));
+                equipments = equipments.Where(s => s.EquipmentName!.ToUpper().Contains(searchString.ToUpper()));
             }
 
             return View(await equipments.ToListAsync());
@@ -48,7 +48,7 @@ namespace SchoolEquipmentHire.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,CategoryID,EquipmentName,Quantity")] Equipment equipment)
+        public async Task<IActionResult> Create([Bind("ID,Category,EquipmentName,Quantity")] Equipment equipment)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +80,7 @@ namespace SchoolEquipmentHire.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,CategoryID,EquipmentName,Quantity")] Equipment equipment)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Category,EquipmentName,Quantity")] Equipment equipment)
         {
             if (id != equipment.ID)
             {
