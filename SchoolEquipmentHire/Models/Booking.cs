@@ -8,10 +8,12 @@ namespace SchoolEquipmentHire.Models
         public int UserID { get; set; }
         public int EquipmentID { get; set; }
 
+        [Required]
         [Display(Name = "Booking Date")]
         [DataType(DataType.Date)]
         public DateTime BookingDate { get; set; }
 
+        [Required]
         [Display(Name = "Return Date")]
         [DataType(DataType.Date)]
         public DateTime ReturnDate { get; set; }

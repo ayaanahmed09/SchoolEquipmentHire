@@ -1,12 +1,20 @@
-﻿namespace SchoolEquipmentHire.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SchoolEquipmentHire.Models
 {
     public class User
     {
         public int ID { get; set; }
-        public string LastName { get; set; }
-        public string FirstMidName { get; set; }
-        public int YearLevel { get; set; }
 
+        [Required]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+        [Required]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+        [Required]
+        public int YearLevel { get; set; }
+        [Required]
         public RoleType Role { get; set; }
 
     }

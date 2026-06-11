@@ -53,7 +53,7 @@ namespace SchoolEquipmentHire.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,LastName,FirstMidName,YearLevel,Role")] User user)
+        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName,YearLevel,Role")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -85,7 +85,7 @@ namespace SchoolEquipmentHire.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,LastName,FirstMidName,YearLevel,Role")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,LastName,YearLevel,Role")] User user)
         {
             if (id != user.ID)
             {

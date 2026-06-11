@@ -54,45 +54,46 @@ namespace SchoolEquipmentHire.Data
                         Category = "Racket",
                     }
                 );
+                context.SaveChanges();
 
                 // Look for any categories.
-                if (context.Equipment.Any())
-                {
-                    return;   // DB has been seeded
-                }
-                context.Category.AddRange(
-                    new Category
-                    {
-                        CategoryName = "Ball",
-                        ID = 1,
-                    },
-                    new Category
-                    {
-                        CategoryName = "Ball",
-                        ID = 1,
-                    },
-                    new Category
-                    {
-                        CategoryName = "Cone",
-                        ID = 2,
-                    },
-                    new Category
-                    {
-                        CategoryName = "Ball",
-                        ID = 1,
-                    },
-                    new Category
-                    {
-                        CategoryName = "Racket",
-                        ID = 3,
-                    },
-                    new Category
-                    {
-                        CategoryName = "Racket",
-                        ID = 3,
-                    }
-                );
-                context.SaveChanges();
+                /* if (context.Equipment.Any())
+                 {
+                     return;   // DB has been seeded
+                 }
+                 context.Category.AddRange(
+                     new Category
+                     {
+                         CategoryName = "Ball",
+                         ID = 1,
+                     },
+                     new Category
+                     {
+                         CategoryName = "Ball",
+                         ID = 1,
+                     },
+                     new Category
+                     {
+                         CategoryName = "Cone",
+                         ID = 2,
+                     },
+                     new Category
+                     {
+                         CategoryName = "Ball",
+                         ID = 1,
+                     },
+                     new Category
+                     {
+                         CategoryName = "Racket",
+                         ID = 3,
+                     },
+                     new Category
+                     {
+                         CategoryName = "Racket",
+                         ID = 3,
+                     }
+                 );
+                 */
             }
         }
     }
