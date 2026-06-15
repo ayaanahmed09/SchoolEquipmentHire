@@ -56,44 +56,28 @@ namespace SchoolEquipmentHire.Data
                 );
                 context.SaveChanges();
 
-                // Look for any categories.
-                /* if (context.Equipment.Any())
-                 {
-                     return;   // DB has been seeded
-                 }
-                 context.Category.AddRange(
-                     new Category
-                     {
-                         CategoryName = "Ball",
-                         ID = 1,
+               /* // Look for any users.
+                if (context.User.Any())
+                {
+                    return;   // DB has been seeded
+                }
+                context.User.AddRange(
+                    new User
+                    {
+                        FirstName = "John",
+                        LastName = "Doe",
+                        YearLevel = 10,
+                         Role = RoleType.Student
                      },
-                     new Category
+                     new User
                      {
-                         CategoryName = "Ball",
-                         ID = 1,
-                     },
-                     new Category
-                     {
-                         CategoryName = "Cone",
-                         ID = 2,
-                     },
-                     new Category
-                     {
-                         CategoryName = "Ball",
-                         ID = 1,
-                     },
-                     new Category
-                     {
-                         CategoryName = "Racket",
-                         ID = 3,
-                     },
-                     new Category
-                     {
-                         CategoryName = "Racket",
-                         ID = 3,
-                     }
+                         FirstName = "Jane",
+                         LastName = "Smith",
+                         YearLevel = 12,
+                         Role = RoleType.Admin
+                     } 
                  );
-                 */
+                context.SaveChanges();*/
             }
         }
     }

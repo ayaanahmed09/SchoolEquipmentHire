@@ -45,6 +45,13 @@ namespace SchoolEquipmentHire.Controllers
         // GET: Users/Create
         public IActionResult Create()
         {
+            var roles = new List<SelectListItem> { new SelectListItem { Value = "", Text = "--Select Role--" } };
+            roles.AddRange(Enum.GetValues(typeof(RoleType)).Cast<RoleType>()
+                .Select(r => new SelectListItem { Value = r.ToString(), Text = r.ToString() }));
+            ViewBag.Role = roles;
+            var yearLevels = new List<SelectListItem> { new SelectListItem { Value = "", Text = "--Select Year Level--" } };
+            yearLevels.AddRange(Enumerable.Range(9, 5).Select(y => new SelectListItem { Value = y.ToString(), Text = y.ToString() }));
+            ViewBag.YearLevels = yearLevels;
             return View();
         }
 
@@ -61,6 +68,13 @@ namespace SchoolEquipmentHire.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            var roles = new List<SelectListItem> { new SelectListItem { Value = "", Text = "--Select Role--" } };
+            roles.AddRange(Enum.GetValues(typeof(RoleType)).Cast<RoleType>()
+                .Select(r => new SelectListItem { Value = r.ToString(), Text = r.ToString() }));
+            ViewBag.Role = roles;
+            var yearLevels = new List<SelectListItem> { new SelectListItem { Value = "", Text = "--Select Year Level--" } };
+            yearLevels.AddRange(Enumerable.Range(9, 5).Select(y => new SelectListItem { Value = y.ToString(), Text = y.ToString() }));
+            ViewBag.YearLevels = yearLevels;
             return View(user);
         }
 
@@ -77,6 +91,13 @@ namespace SchoolEquipmentHire.Controllers
             {
                 return NotFound();
             }
+            var roles = new List<SelectListItem> { new SelectListItem { Value = "", Text = "--Select Role--" } };
+            roles.AddRange(Enum.GetValues(typeof(RoleType)).Cast<RoleType>()
+                .Select(r => new SelectListItem { Value = r.ToString(), Text = r.ToString() }));
+            ViewBag.Role = roles;
+            var yearLevels = new List<SelectListItem> { new SelectListItem { Value = "", Text = "--Select Year Level--" } };
+            yearLevels.AddRange(Enumerable.Range(9, 5).Select(y => new SelectListItem { Value = y.ToString(), Text = y.ToString() }));
+            ViewBag.YearLevels = yearLevels;
             return View(user);
         }
 
@@ -112,6 +133,13 @@ namespace SchoolEquipmentHire.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            var roles = new List<SelectListItem> { new SelectListItem { Value = "", Text = "--Select Role--" } };
+            roles.AddRange(Enum.GetValues(typeof(RoleType)).Cast<RoleType>()
+                .Select(r => new SelectListItem { Value = r.ToString(), Text = r.ToString() }));
+            ViewBag.Role = roles;
+            var yearLevels = new List<SelectListItem> { new SelectListItem { Value = "", Text = "--Select Year Level--" } };
+            yearLevels.AddRange(Enumerable.Range(9, 5).Select(y => new SelectListItem { Value = y.ToString(), Text = y.ToString() }));
+            ViewBag.YearLevels = yearLevels;
             return View(user);
         }
 
