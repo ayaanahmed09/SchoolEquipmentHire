@@ -2,26 +2,287 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>School Equipment Hire</h1>
+    @section Scripts {}
+    <script src="~/js/carousel1.js" asp-append-version="true"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('searchForm');
+            const searchInput = form.querySelector('input[name="searchString"]');
+            form.addEventListener('submit', function (e) {
+                if (!searchInput.value.trim()) {
+                    e.preventDefault();
+                    searchInput.classList.add('is-invalid');
+                    searchInput.setAttribute('placeholder', 'Please enter a search term');
+                } else {
+                    searchInput.classList.remove('is-invalid');
+                }
+            });
+        });
+    </script>
+
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <div class="welcome-container">
+            <img src="~/images/Avondale College Logo.png" alt="School Logo" class="school-logo" />
+            <h1 class="welcome-title">Welcome Student</h1>
+            <p class="welcome-subtitle">Hire Now</p>
+
+            <div class="btn-container">
+                <div class="btn-top">
+                    <p>Don't have an account?</p>
+                    <a asp-area="Identity" asp-page="/Account/Register" class="signup-btn">SIGN UP</a>
+                </div>
+                <div class="btn-bottom">
+                    <p>Already have an account?</p>
+                    <a asp-area="Identity" asp-page="/Account/Login" class="login-btn">LOGIN</a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="home-container text-center">
+            <h1 class="main-title">Hire Equipment</h1>
+
+            <form id="searchForm" asp-controller="Equipments" asp-action="AllEquipment" method="get" class="search-bar">
+                <span class="search-icon"><i class="fas fa-search"></i></span>
+                <input type="text" name="searchString" placeholder="Search Equipment" />
+                <button type="submit" class="search-btn">Search</button>
+            </form>
+            </div>
+
+            <!-- Bottom Buttons -->
+            <div class="bottom-buttons">
+                <div class="button-card">
+                    <h3>ALL EQUIPMENT</h3>
+                    <a asp-controller="EquipmentItems" asp-action="AllEquipment">
+                        <img class="card-img-1" src="~/images/All Equipment.png" alt="All Equipment" />
+                    </a>
+                </div>
+                <div class="button-card">
+                    <h3>YOUR SPORT</h3>
+                    <a asp-controller="EquipmentItems" asp-action="AllEquipment" asp-route-favourite="true">
+                        <img class="card-img-2" src="~/images/ProfilePicture.png" alt="Sports" />
+
+                    </a>
+                </div>
+                <div class="button-card">
+                    <h3>HIRE IT AGAIN</h3>
+                    <a asp-controller="EquipmentItems" asp-action="AllEquipment" asp-route-hireAgain="true">
+                        <img class="card-img-3" src="~/images/Hire It Again.png" alt="Hire Again" />
+                    </a>
+                </div>
+            </div>
+    }
 </div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>Welcome to School Equipment Hire</h2>
-        <p>
-            School Equipment Hire is a sample application that
-            demonstrates how to use Entity Framework Core in an
-            ASP.NET Core MVC web application.
-        </p>
-    </div>
-    <div class="col-md-4">
-        <h2>Build it from scratch</h2>
-        <p>You can build the application by following the steps in a series of tutorials.</p>
-        <p><a class="btn btn-default" href="https://docs.asp.net/en/latest/data/ef-mvc/intro.html">See the tutorial &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Download it</h2>
-        <p>You can download the completed project from GitHub.</p>
-        <p><a class="btn btn-default" href="https://github.com/dotnet/AspNetCore.Docs/tree/main/aspnetcore/data/ef-mvc/intro/samples/cu-final">See project source code &raquo;</a></p>
-    </div>
-</div>
+
+                        <style>
+    @{
+    ViewData["Title"] = "Home";
+}
+
+<style>
+    /*SIGN UP PAGE*/
+    body {
+        font-family: 'Creato Display', 'Montserrat', sans-serif;
+        background-color: #fff;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    .welcome-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .school-logo {
+        width: 8rem;
+        height: auto;
+    }
+
+    .welcome-title {
+        font-size: 4.5rem;
+        color: black;
+        font-weight: 750;
+    }
+
+    .welcome-subtitle {
+        color: black; 
+        font-size: 1.7rem;
+        font-style: italic;
+        margin-bottom: 0px;
+    }
+
+    .btn-container {
+        border-radius: 20px;
+        width: 500px;
+        margin: 1rem auto; 
+        font-size: 1.1rem;
+        color: black;
+        text-align: center;
+        box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+
+    .btn-container p {
+        margin: 0 0 15px; /* adds spacing above buttons */
+        font-size: 1.1rem;
+        font-style: italic;
+        color: black;
+        text-align: center;
+    }
+
+    .btn-container a {
+        display: inline-block; 
+        min-width: 180px;
+        padding: 18px 20px;
+        border-radius: 35px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-decoration: none;
+        color: #000;
+        transition: all 0.2s ease-in-out;
+        text-align: center;
+    }
+
+    .btn-top {
+        background: #cccccc;
+        padding: 40px 20px;
+    }
+
+    .btn-bottom {
+        background: #e6e6e6;
+        padding: 40px 20px;
+    }
+
+    .btn-container .signup-btn {
+        background: #e6e6e6;
+    }
+
+    .btn-container .signup-btn:hover {
+        background: #d6d6d6;
+    }
+
+    .btn-container .login-btn {
+        background: #cccccc;
+    }
+
+    .btn-container .login-btn:hover {
+        background: #bcbcbc;
+    }
+
+    /*HOME PAGE*/
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.main-title {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: #f2f2f2;
+    border-radius: 40px;
+    padding: 12px 15px;
+    width: 35%;
+    margin: 0 auto;
+}
+
+.search-bar .search-icon {
+    font-size: 1.2rem;
+    color: #666;
+    margin-right: 10px;
+}
+
+.search-bar input {
+    border: none;
+    outline: none;
+    flex: 1;
+    background: transparent;
+    font-size: 1.1rem;
+    padding: 5px;
+}
+
+.search-bar .search-btn {
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.search-bar .search-btn:hover {
+    background: #555;
+}
+
+.bottom-buttons {
+    width: 45%;
+    margin: 2rem auto;
+    margin-bottom: 0; 
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.button-card {
+    flex: 1;
+    aspect-ratio: 1 / 1;
+    background: #cccccc;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+
+    display: flex;
+    flex-direction: column; /* Stack title and image vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: space-between; /* Even top & bottom spacing */
+    padding: 20px; /* Add inner spacing */
+    text-align: center;
+}
+
+.button-card h3 {
+    font-weight: 650;
+    color: #7d7d7d;
+    font-size: 1.7rem;
+    margin: 0;
+}
+
+.button-card a {
+    display: flex;
+    flex: 1; /* Take up remaining space */
+    align-items: center; /* Center image vertically */
+    justify-content: center; /* Center image horizontally */
+}
+
+
+.card-img-1{
+    width: 70%;
+    height: auto;
+    object-fit: contain;
+}
+.card-img-2{
+    width: 70%;
+    height: auto;
+    object-fit: contain;
+}
+.card-img-3{
+    width: 70%;
+    height: auto;
+    object-fit: contain;
+}
+</style>
+
+<script src="~/js/carousel1.js"></script>  
+<link rel="stylesheet" href="~/css/carousel.css"/>
