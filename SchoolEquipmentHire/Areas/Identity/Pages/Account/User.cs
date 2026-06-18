@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
-namespace SchoolEquipmentHire.Models
+namespace SchoolEquipmentHire.Areas.Identity.Pages.Account
 {
-    public class User
+    public class User: IdentityUser
     {
         public int ID { get; set; }
 
