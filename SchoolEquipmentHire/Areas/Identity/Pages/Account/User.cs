@@ -5,8 +5,6 @@ namespace SchoolEquipmentHire.Areas.Identity.Pages.Account
 {
     public class User: IdentityUser
     {
-        public int ID { get; set; }
-
         [Required]
         [Display(Name = "First Name")]
         public string? FirstName { get; set; }
