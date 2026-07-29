@@ -116,7 +116,8 @@ public class LoginModel : PageModel
             if (result.Succeeded)
             {
                 _logger.LogInformation("User logged in.");
-                return LocalRedirect(returnUrl);
+                // Always redirect to the home page after login
+                return LocalRedirect(Url.Content("~/"));        
             }
             if (result.RequiresTwoFactor)
             {

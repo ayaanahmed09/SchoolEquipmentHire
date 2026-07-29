@@ -2,24 +2,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-    @section Scripts {}
-    <script src="~/js/carousel1.js" asp-append-version="true"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const form = document.getElementById('searchForm');
-            const searchInput = form.querySelector('input[name="searchString"]');
-            form.addEventListener('submit', function (e) {
-                if (!searchInput.value.trim()) {
-                    e.preventDefault();
-                    searchInput.classList.add('is-invalid');
-                    searchInput.setAttribute('placeholder', 'Please enter a search term');
-                } else {
-                    searchInput.classList.remove('is-invalid');
-                }
-            });
-        });
-    </script>
-
     @if (!User.Identity.IsAuthenticated)
     {
         <div class="welcome-container">
