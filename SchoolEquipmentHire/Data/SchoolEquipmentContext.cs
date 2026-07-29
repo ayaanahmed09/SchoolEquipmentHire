@@ -6,14 +6,14 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using SchoolEquipmentHire.Areas.Identity.Pages.Account;
 
-public class SchoolEquipmentContext : IdentityDbContext<User>
+public class SchoolEquipmentContext : IdentityDbContext<AppUser>
     {
         public SchoolEquipmentContext (DbContextOptions<SchoolEquipmentContext> options)
             : base(options)
         {
         }
 
-        public DbSet<User> User { get; set; } = default!;
+        public DbSet<AppUser> User { get; set; } = default!;
 
 public DbSet<SchoolEquipmentHire.Models.Booking> Booking { get; set; } = default!;
 

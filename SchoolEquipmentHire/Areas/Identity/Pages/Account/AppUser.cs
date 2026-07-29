@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SchoolEquipmentHire.Areas.Identity.Pages.Account
 {
-    public class User: IdentityUser
+    public class AppUser: IdentityUser
     {
         [Required]
         [Display(Name = "First Name")]

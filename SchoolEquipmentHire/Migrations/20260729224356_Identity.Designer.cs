@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace SchoolEquipmentHire.Migrations
 {
     [DbContext(typeof(SchoolEquipmentContext))]
-    [Migration("20260624000554_ChangesInUserModel")]
-    partial class ChangesInUserModel
+    [Migration("20260729224356_Identity")]
+    partial class Identity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -183,9 +183,6 @@ namespace SchoolEquipmentHire.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ID")
-                        .HasColumnType("int");
 
                     b.Property<string>("LastName")
                         .IsRequired()

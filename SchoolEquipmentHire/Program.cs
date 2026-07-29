@@ -4,11 +4,13 @@ using SchoolEquipmentHire.Data;
 using Microsoft.AspNetCore.Identity;
 using SchoolEquipmentHire.Models;
 using SchoolEquipmentHire.Areas.Identity.Pages.Account;
+
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<SchoolEquipmentContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SchoolEquipmentContext") ?? throw new InvalidOperationException("Connection string 'SchoolEquipmentContext' not found.")));
 
-builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<SchoolEquipmentContext>();
+builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<SchoolEquipmentContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

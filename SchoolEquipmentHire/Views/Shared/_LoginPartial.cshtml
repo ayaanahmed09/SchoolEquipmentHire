@@ -2,8 +2,8 @@
 @using SchoolEquipmentHire.Areas.Identity
 @using SchoolEquipmentHire.Areas.Identity.Pages.Account
 
-@inject SignInManager<User> SignInManager
-@inject UserManager<User> UserManager
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
@@ -11,10 +11,10 @@
         <li class="nav-item">
             @{
                 var user = await UserManager.GetUserAsync(User);
-                var fullName = user?.FirstName + " " + user?.LastName;
+                //var fullName = user?.FirstName + " " + user?.LastName;
             }
             <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-                Hello @fullName!
+                Hello 
             </a>
         </li>
         <li class="nav-item">
