@@ -1,8 +1,13 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@using SchoolEquipmentHire.Areas.Identity.Pages.Account
+@{
     ViewData["Title"] = "Home Page";
 }
 
-    @if (!User.Identity.IsAuthenticated)
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+    @if (!SignInManager.IsSignedIn(User))
     {
         <div class="welcome-container">
             <img src="~/images/Avondale College Logo.png" alt="School Logo" class="school-logo" />

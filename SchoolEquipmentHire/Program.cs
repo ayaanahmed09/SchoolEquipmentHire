@@ -20,6 +20,8 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<SchoolEquipmentContext>();
+    context.Database.EnsureCreated();
 
     SeedData.Initialize(services);
 }

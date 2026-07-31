@@ -45,8 +45,7 @@
             Sign up with your email
         </p>
 
-        <form asp-action="Register" method="post">
-
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
             <div class="mb-3">
                 <input asp-for="Input.Email"
                        class="form-control"
