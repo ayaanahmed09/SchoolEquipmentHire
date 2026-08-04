@@ -45,8 +45,29 @@
             Sign up with your email
         </p>
 
-        <form asp-action="Register" method="post">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
 
+            <div class="mb-3">
+                <input asp-for="Input.FirstName"
+                       class="form-control"
+                       placeholder="FirstName" />
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <input asp-for="Input.LastName"
+                       class="form-control"
+                       placeholder="LastName" />
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <input asp-for="Input.YearLevel"
+                       class="form-control"
+                       placeholder="Year Level" />
+                <span asp-validation-for="Input.YearLevel" class="text-danger"></span>
+            </div>
+            
             <div class="mb-3">
                 <input asp-for="Input.Email"
                        class="form-control"
@@ -75,7 +96,7 @@
             </button>
 
             <div class="text-center mt-3">
-                <a asp-action="Login" class="text-decoration-none">
+                <a asp-area="Identity" asp-page="/Account/Login" class="text-decoration-none">
                     Already have an account? Sign in
                 </a>
             </div>

@@ -10,19 +10,23 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<SchoolEquipmentContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SchoolEquipmentContext") ?? throw new InvalidOperationException("Connection string 'SchoolEquipmentContext' not found.")));
 
-builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<SchoolEquipmentContext>();
+builder.Services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<SchoolEquipmentContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<SchoolEquipmentContext>();
+    context.Database.EnsureCreated();
 
     SeedData.Initialize(services);
 }
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/SchoolEquipmentHire.slnx
+/SchoolEquipmentHire/appsettings.json
+/SchoolEquipmentHire/appsettings.json

@@ -45,7 +45,7 @@
         <h2 class="text-center mb-2">Log In</h2>
         <p class="text-center text-muted mb-4">Log in with your email</p>
 
-        <form method="post">
+        <form id="account" asp-route-returnUrl="@Model.ReturnUrl" method="post">
 
             <div class="mb-3">
                 <input asp-for="Input.Email" class="form-control" placeholder="Email" />
