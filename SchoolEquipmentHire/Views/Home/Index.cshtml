@@ -7,6 +7,7 @@
 @inject SignInManager<AppUser> SignInManager
 @inject UserManager<AppUser> UserManager
 
+    <div>
     @if (!SignInManager.IsSignedIn(User))
     {
         <div class="welcome-container">
