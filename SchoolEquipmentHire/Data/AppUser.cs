@@ -18,7 +18,7 @@ namespace SchoolEquipmentHire.Data
         public int? YearLevel { get; set; }
         [Required]
         public RoleType? Role { get; set; }
-        public Booking Booking { get; set; }
+        public ICollection<Booking> Booking { get; set; }
     }
 
     public enum RoleType
