@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SchoolEquipmentHire.Areas.Identity.Pages.Account;
+using SchoolEquipmentHire.Data;
 
 public class SchoolEquipmentContext : IdentityDbContext<AppUser>
     {

@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using SchoolEquipmentHire.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace SchoolEquipmentHire.Areas.Identity.Pages.Account
+namespace SchoolEquipmentHire.Data
 {
     public class AppUser: IdentityUser
     {
@@ -17,7 +18,7 @@ namespace SchoolEquipmentHire.Areas.Identity.Pages.Account
         public int? YearLevel { get; set; }
         [Required]
         public RoleType? Role { get; set; }
-
+        public Booking Booking { get; set; }
     }
 
     public enum RoleType

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SchoolEquipmentHire.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace SchoolEquipmentHire.Models
 {
@@ -6,6 +7,7 @@ namespace SchoolEquipmentHire.Models
     {
         public int ID { get; set; }
         public int UserID { get; set; }
+        public AppUser? User { get; set; }
         public int EquipmentID { get; set; }
 
         [Required]
@@ -17,5 +19,6 @@ namespace SchoolEquipmentHire.Models
         [Display(Name = "Return Date")]
         [DataType(DataType.Date)]
         public DateTime ReturnDate { get; set; }
+
     }
 }
