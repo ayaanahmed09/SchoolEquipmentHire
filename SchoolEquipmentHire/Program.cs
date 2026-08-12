@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using SchoolEquipmentHire.Data;
 using Microsoft.AspNetCore.Identity;
 using SchoolEquipmentHire.Models;
-using SchoolEquipmentHire.Areas.Identity.Pages.Account;
 
 
 var builder = WebApplication.CreateBuilder(args);

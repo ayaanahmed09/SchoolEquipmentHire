@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
-namespace SchoolEquipmentHire.Areas.Identity.Pages.Account
+namespace SchoolEquipmentHire.Data
 {
     public class AppUser: IdentityUser
     {
