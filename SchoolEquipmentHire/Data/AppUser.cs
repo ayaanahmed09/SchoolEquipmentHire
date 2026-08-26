@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using SchoolEquipmentHire.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace SchoolEquipmentHire.Data
 {
     public class AppUser: IdentityUser
     {
+        public static bool Identity { get; internal set; }
         [Required]
         [Display(Name = "First Name")]
         public string? FirstName { get; set; }
@@ -16,7 +18,7 @@ namespace SchoolEquipmentHire.Data
         public int? YearLevel { get; set; }
         [Required]
         public RoleType? Role { get; set; }
-
+        public ICollection<Booking> Booking { get; set; }
     }
 
     public enum RoleType

@@ -37,13 +37,15 @@
     }
 </style>
 
-<div class="register-container">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+
+   <div class="register-container">
     <div class="register-card">
 
-        <h2 class="text-center mb-2">Create Account</h2>
-        <p class="text-center text-muted mb-4">
-            Sign up with your email
-        </p>
+            <h2 class="text-center mb-2">Create Account</h2>
+            <p class="text-center text-muted mb-4">
+                Sign up with your email
+            </p>
 
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
 
@@ -100,8 +102,7 @@
                     Already have an account? Sign in
                 </a>
             </div>
-
-        </form>
+            </form>
     </div>
 </div>
 
