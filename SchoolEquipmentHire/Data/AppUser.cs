@@ -6,7 +6,6 @@ namespace SchoolEquipmentHire.Data
 {
     public class AppUser: IdentityUser
     {
-        public static bool Identity { get; internal set; }
         [Required]
         [Display(Name = "First Name")]
         public string? FirstName { get; set; }

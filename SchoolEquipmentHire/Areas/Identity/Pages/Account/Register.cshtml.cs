@@ -84,12 +84,7 @@ public class RegisterModel : PageModel
         public string LastName { get; set; } = default!;
 
         [Required]
-        [Display(Name = "Last Name")]
-        public string? LastName { get; set; }
-        [Required]
         [Range(9, 13, ErrorMessage = "Year level must be between 9 and 13")]
-        public int? YearLevel { get; set; }
-        [Required]
         
         [EmailAddress]
         [Display(Name = "Email")]
