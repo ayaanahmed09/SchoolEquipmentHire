@@ -11,7 +11,7 @@
     @if (!SignInManager.IsSignedIn(User))
     {
         <div class="welcome-container">
-            <img src="~/" alt="School Logo" class="school-logo" />
+            <img src="~/images/avondale college logo.jpg" alt="School Logo" class="school-logo" />
             <h1 class="welcome-title">Welcome Student</h1>
             <p class="welcome-subtitle">Hire Now</p>
 
@@ -32,7 +32,7 @@
         <div class="home-container text-center">
             <h1 class="main-title">Hire Equipment</h1>
 
-            <form id="searchForm" asp-controller="Equipments" asp-action="AllEquipment" method="get" class="search-bar">
+            <form id="searchForm" asp-controller="Equipments" asp-action="Equipment" method="get" class="search-bar">
                 <span class="search-icon"><i class="fas fa-search"></i></span>
                 <input type="text" name="searchString" placeholder="Search Equipment" />
                 <button type="submit" class="search-btn">Search</button>
