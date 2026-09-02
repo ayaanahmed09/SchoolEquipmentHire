@@ -21,11 +21,17 @@
             transform: translateX(-50%);
             text-align: center;
         }
+        /* Thin black bar below the main navbar */
+        .sub-navbar {
+            height: 29px;
+            background-color: #000000;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">School Equipment Hire</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -51,6 +57,8 @@
                 </div>
             </div>
         </nav>
+        <div class="sub-navbar" aria-hidden="true"></div>
+        <div class="sub-navbar-shadow box-shadow" aria-hidden="true"></div>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
