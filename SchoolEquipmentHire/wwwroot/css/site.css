@@ -29,3 +29,21 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+/* Center the brand text in the navbar */
+.navbar {
+    position: relative;
+}
+
+    .navbar .navbar-brand {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+    }
+/* Thin black bar below the main navbar */
+.sub-navbar {
+    height: 29px;
+    background-color: #000000;
+    width: 100%;
+}

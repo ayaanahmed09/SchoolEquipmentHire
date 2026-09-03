@@ -3,10 +3,8 @@
 @{
     ViewData["Title"] = "Register";
 }
+
 <style>
-    body {
-        background-color: #f8f9fa;
-    }
 
     .register-container {
         min-height: 100vh;
@@ -100,7 +98,7 @@
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
 
-            <button type="submit" class="btn btn-primary w-100">
+            <button type="submit" class="btn register-btn w-100">
                 Register
             </button>
 
