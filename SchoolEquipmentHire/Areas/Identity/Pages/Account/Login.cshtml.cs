@@ -130,7 +130,19 @@ public class LoginModel : PageModel
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                // Differentiate between no account and incorrect password when possible
+                var user = await _signInManager.UserManager.FindByEmailAsync(Input.Email);
+                if (user != null)
+                {
+                    // User exists, so most likely the password was incorrect
+                    ModelState.AddModelError(string.Empty, "Incorrect password! Please try again.");
+                }
+                else
+                {
+                    // No user with that email
+                    ModelState.AddModelError(string.Empty, "No account found with that email.");
+                }
+
                 return Page();
             }
         }

@@ -50,6 +50,7 @@
 
         <h2 class="text-center mb-2">Log In</h2>
         <p class="text-center text-muted mb-4">Log in with your email</p>
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
 
         <form id="account" asp-route-returnUrl="@Model.ReturnUrl" method="post">
 
