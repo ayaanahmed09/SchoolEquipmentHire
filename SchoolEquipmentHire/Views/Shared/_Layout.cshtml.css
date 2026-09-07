@@ -46,3 +46,19 @@ button.accept-policy {
   white-space: nowrap;
   line-height: 60px;
 }
+
+/* Ensure any legacy sub-navbar and its shadow don't affect layout */
+.sub-navbar,
+.sub-navbar-shadow {
+  display: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  pointer-events: none !important;
+}
+
+/* Add a subtle shadow under the main navbar */
+.navbar {
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
