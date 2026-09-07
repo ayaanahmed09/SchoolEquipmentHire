@@ -1,53 +1,128 @@
 ﻿@model IEnumerable<SchoolEquipmentHire.Models.Equipment>
 
-@{
-    ViewData["Title"] = "View Equipments";
-}
+<div class="equipment page">
+    
+    <div class="top-row">
+        <input type="text" id="searchBox" placeholder="Search equipments..." class="search-input"/>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+        <select id="categoryFilter" class="category-dropdown">
+            <option value="">All Categories</option>
+            @foreach (var cat in Model.Select(m => m.Category).Distinct())
+            {
+                <option value="@cat">@cat</option>
+            }
+        </select>
+    </div>
 
-<form asp-controller="Equipments" asp-action="Index" method="get">
-    <p>
-        <label>Equipment: <input type="text" name="SearchString" /></label>
-        <input type="submit" value="Filter" />
-    </p>
-</form>
+    <div class="equipment-grid">
+        @foreach (var item in Model)
+        {
+            <a asp-action="Details" asp-route-id="@item.ID" class="equipment-card" data-category="@item.Category">
+                <div class="card-title">@item.EquipmentName</div>
+                <div class="card-category">Category: @item.Category</div>
+                <div class="card-availability">Available: @item.Quantity</div>
+            </a>
+        }
+</div>
+</div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EquipmentName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantity)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EquipmentName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<style>
+
+    .equipment-page {
+        max-width: 1100px;
+        padding-top: 60px; /* pushes everything down */
+        margin: 0 auto;
+    }
+
+    .top-row {
+        display: flex;
+        gap: 60px;
+        margin-bottom: 25px;
+    }
+
+    .search-input {
+        flex: 1;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 15px;
+    }
+
+    .category-dropdown {
+        width: 200px;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 15px;
+    }
+
+    .equipment-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+        gap: 20px;
+    }
+
+    .equipment-card {
+        display: block;
+        background: #fff;
+        padding: 28px;
+        border-radius: 12px;
+        border: 1px solid #e0e0e0;
+        text-decoration: none;
+        color: #333;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+        transition: transform .15s ease, box-shadow .15s ease;
+        min-height: 160px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+        .equipment-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+    .card-title {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .card-category {
+        font-size: 14px;
+        color: #777;
+        margin-bottom: 10px;
+    }
+
+    .card-availability {
+        font-size: 16px;
+        font-weight: 700;
+        color: #007bff;
+    }
+</style>
+
+<script>
+    // Simple search + filter
+    const searchBox = document.getElementById("searchBox");
+    const categoryFilter = document.getElementById("categoryFilter");
+    const cards = document.querySelectorAll(".equipment-card");
+
+    function filter() {
+        const search = searchBox.value.toLowerCase();
+        const category = categoryFilter.value;
+
+        cards.forEach(card => {
+            const name = card.querySelector(".card-title").innerText.toLowerCase();
+            const cat = card.dataset.category;
+
+            const matchesSearch = name.includes(search);
+            const matchesCategory = !category || cat === category;
+
+            card.style.display = (matchesSearch && matchesCategory) ? "block" : "none";
+        });
+    }
+
+    searchBox.addEventListener("input", filter);
+    categoryFilter.addEventListener("change", filter);
+</script>
