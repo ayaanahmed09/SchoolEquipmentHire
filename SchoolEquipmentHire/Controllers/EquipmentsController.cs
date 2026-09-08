@@ -110,6 +110,25 @@ namespace SchoolEquipmentHire.Controllers
             return View(equipment);
         }
 
+        // GET: Equipments/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var equipment = await _context.Equipment
+                .FirstOrDefaultAsync(m => m.ID == id);
+
+            if (equipment == null)
+            {
+                return NotFound();
+            }
+
+            return View(equipment);
+        }
+
         // GET: Equipments/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
