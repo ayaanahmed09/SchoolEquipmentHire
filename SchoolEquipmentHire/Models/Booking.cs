@@ -5,7 +5,7 @@ namespace SchoolEquipmentHire.Models
 {
     public class Booking
     {
-        public int ID { get; set; }
+        public int BookingID { get; set; }
         public int UserID { get; set; }
         public AppUser? User { get; set; }
         public int EquipmentID { get; set; }

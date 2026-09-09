@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace SchoolEquipmentHire.Migrations
 {
     [DbContext(typeof(SchoolEquipmentContext))]
-    partial class SchoolEquipmentContextModelSnapshot : ModelSnapshot
+    [Migration("20260909002344_ImageUrlInEquipmentModel")]
+    partial class ImageUrlInEquipmentModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -239,11 +242,11 @@ namespace SchoolEquipmentHire.Migrations
 
             modelBuilder.Entity("SchoolEquipmentHire.Models.Booking", b =>
                 {
-                    b.Property<int>("BookingID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("datetime2");
@@ -260,7 +263,7 @@ namespace SchoolEquipmentHire.Migrations
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("BookingID");
+                    b.HasKey("ID");
 
                     b.HasIndex("UserId");
 

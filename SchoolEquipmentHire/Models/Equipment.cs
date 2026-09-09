@@ -10,5 +10,7 @@ namespace SchoolEquipmentHire.Models
         [Display(Name = "Equipment Name")]
         public string EquipmentName { get; set; }
         public int Quantity { get; set; }
+        public string? ImageUrl { get; set; }
+
     }
 }

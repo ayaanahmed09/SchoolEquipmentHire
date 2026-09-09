@@ -33,7 +33,7 @@ namespace SchoolEquipmentHire.Controllers
             }
 
             var booking = await _context.Booking
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.BookingID == id);
             if (booking == null)
             {
                 return NotFound();
@@ -85,9 +85,9 @@ namespace SchoolEquipmentHire.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,UserID,EquipmentID,BookingDate,ReturnDate")] Booking booking)
+        public async Task<IActionResult> Edit(int id, [Bind("BookingID,UserID,EquipmentID,BookingDate,ReturnDate")] Booking booking)
         {
-            if (id != booking.ID)
+            if (id != booking.BookingID)
             {
                 return NotFound();
             }
@@ -101,7 +101,7 @@ namespace SchoolEquipmentHire.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BookingExists(booking.ID))
+                    if (!BookingExists(booking.BookingID))
                     {
                         return NotFound();
                     }
@@ -124,7 +124,7 @@ namespace SchoolEquipmentHire.Controllers
             }
 
             var booking = await _context.Booking
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.BookingID == id);
             if (booking == null)
             {
                 return NotFound();
@@ -150,7 +150,7 @@ namespace SchoolEquipmentHire.Controllers
 
         private bool BookingExists(int id)
         {
-            return _context.Booking.Any(e => e.ID == id);
+            return _context.Booking.Any(e => e.BookingID == id);
         }
     }
 }
