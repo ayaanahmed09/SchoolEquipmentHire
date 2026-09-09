@@ -82,14 +82,13 @@ public class RegisterModel : PageModel
         [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; } = default!;
-
-        [Required]
-        [Range(9, 13, ErrorMessage = "Year level must be between 9 and 13")]
         
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; } = default!;
-        
+
+        [Range(9, 13, ErrorMessage = "Year level must be between 9 and 13")]
+
         [Required]
         [Display(Name = "Year Level")]
         public int YearLevel { get; set; } = default!;
@@ -129,16 +128,16 @@ public class RegisterModel : PageModel
     {
         returnUrl ??= Url.Content("~/");
         ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-        if (!ModelState.IsValid)
-        {
-            var user = CreateUser();
-
-            await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
-            await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
-            var result = await _userManager.CreateAsync(user, Input.Password);
-
-            if (result.Succeeded)
+            if (!ModelState.IsValid)
             {
+                var user = CreateUser();
+
+                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+                await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
+                var result = await _userManager.CreateAsync(user, Input.Password);
+
+                if (result.Succeeded)
+                {
         _logger.LogInformation("User created a new account with password.");
 
         var userId = await _userManager.GetUserIdAsync(user);
