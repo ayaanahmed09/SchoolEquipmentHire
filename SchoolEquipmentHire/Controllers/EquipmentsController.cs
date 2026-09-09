@@ -166,5 +166,25 @@ namespace SchoolEquipmentHire.Controllers
         {
             return _context.Equipment.Any(e => e.ID == id);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Book(int id)
+        {
+            var equipment = await _context.Equipment.FindAsync(id);
+
+            if (equipment == null)
+                return NotFound();
+
+            if (equipment.Quantity <= 0)
+                return BadRequest("No equipment available to book.");
+
+            // Reduce quantity
+            equipment.Quantity -= 1;
+
+            await _context.SaveChangesAsync();
+
+            // Redirect back to details page
+            return RedirectToAction("Details", new { id = id });
+        }
     }
 }
