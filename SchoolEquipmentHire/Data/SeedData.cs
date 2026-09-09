@@ -22,42 +22,36 @@ namespace SchoolEquipmentHire.Data
                         EquipmentName = "Football",
                         Quantity = 5,
                         Category = "Ball",
-                        ImageUrl = "/images/equipments/football.png"
                     },
                     new Equipment
                     {
                         EquipmentName = "Basketball",
                         Quantity = 10,
                         Category = "Ball",
-                        ImageUrl = "/images/equipments/Basketball.png"
                     },
                     new Equipment
                     {
                         EquipmentName = "Cone",
                         Quantity = 15,
                         Category = "Other",
-                        ImageUrl = "/images/equipments/Cone.png"
                     },
                     new Equipment
                     {
                         EquipmentName = "Tennis Ball",
                         Quantity = 20,
                         Category = "Ball",
-                        ImageUrl = "/images/equipments/TennisBall.png"
                     },
                     new Equipment
                     {
                         EquipmentName = "Badmminton Racket",
                         Quantity = 5,
                         Category = "Racket",
-                        ImageUrl = "/images/equipments/BadmintonRacket.png"
                     },
                     new Equipment
                     {
                         EquipmentName = "Table Tennis Racket",
                         Quantity = 10,
                         Category = "Racket",
-                        ImageUrl = "/images/equipments/TableTennisRacket.png"
                     }
                 );
                 context.SaveChanges();

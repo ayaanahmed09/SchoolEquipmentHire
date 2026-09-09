@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace SchoolEquipmentHire.Migrations
 {
     [DbContext(typeof(SchoolEquipmentContext))]
-    partial class SchoolEquipmentContextModelSnapshot : ModelSnapshot
+    [Migration("20260909224455_ChangesInAppUser")]
+    partial class ChangesInAppUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -245,6 +248,9 @@ namespace SchoolEquipmentHire.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BookingID"));
 
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("BookingDate")
                         .HasColumnType("datetime2");
 
@@ -259,6 +265,8 @@ namespace SchoolEquipmentHire.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("BookingID");
+
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("UserID");
 
@@ -361,8 +369,12 @@ namespace SchoolEquipmentHire.Migrations
 
             modelBuilder.Entity("SchoolEquipmentHire.Models.Booking", b =>
                 {
-                    b.HasOne("SchoolEquipmentHire.Data.AppUser", "User")
+                    b.HasOne("SchoolEquipmentHire.Data.AppUser", null)
                         .WithMany("Booking")
+                        .HasForeignKey("AppUserId");
+
+                    b.HasOne("SchoolEquipmentHire.Data.AppUser", "User")
+                        .WithMany()
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

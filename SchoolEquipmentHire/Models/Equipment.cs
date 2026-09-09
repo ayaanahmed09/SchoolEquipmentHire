@@ -11,6 +11,5 @@ namespace SchoolEquipmentHire.Models
         public string EquipmentName { get; set; }
         public int Quantity { get; set; }
         public string? ImageUrl { get; set; }
-
     }
 }

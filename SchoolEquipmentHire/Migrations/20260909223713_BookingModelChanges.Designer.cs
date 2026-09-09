@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace SchoolEquipmentHire.Migrations
 {
     [DbContext(typeof(SchoolEquipmentContext))]
-    [Migration("20260909003859_ChangesInBookingModel")]
-    partial class ChangesInBookingModel
+    [Migration("20260909223713_BookingModelChanges")]
+    partial class BookingModelChanges
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -257,15 +257,13 @@ namespace SchoolEquipmentHire.Migrations
                     b.Property<DateTime>("ReturnDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
+                    b.Property<string>("UserID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("BookingID");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserID");
 
                     b.ToTable("Booking");
                 });
@@ -368,7 +366,9 @@ namespace SchoolEquipmentHire.Migrations
                 {
                     b.HasOne("SchoolEquipmentHire.Data.AppUser", "User")
                         .WithMany("Booking")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
