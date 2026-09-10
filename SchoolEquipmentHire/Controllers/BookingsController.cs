@@ -53,7 +53,7 @@ namespace SchoolEquipmentHire.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,UserID,EquipmentID,BookingDate,ReturnDate")] Booking booking)
+        public async Task<IActionResult> Create([Bind("BookingID,UserID,EquipmentID,BookingDate,ReturnDate")] Booking booking)
         {
             if (ModelState.IsValid)
             {

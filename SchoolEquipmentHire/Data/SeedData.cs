@@ -16,44 +16,6 @@ namespace SchoolEquipmentHire.Data
                 {
                     return;   // DB has been seeded
                 }
-                context.Equipment.AddRange(
-                    new Equipment
-                    {
-                        EquipmentName = "Football",
-                        Quantity = 5,
-                        Category = "Ball",
-                    },
-                    new Equipment
-                    {
-                        EquipmentName = "Basketball",
-                        Quantity = 10,
-                        Category = "Ball",
-                    },
-                    new Equipment
-                    {
-                        EquipmentName = "Cone",
-                        Quantity = 15,
-                        Category = "Other",
-                    },
-                    new Equipment
-                    {
-                        EquipmentName = "Tennis Ball",
-                        Quantity = 20,
-                        Category = "Ball",
-                    },
-                    new Equipment
-                    {
-                        EquipmentName = "Badmminton Racket",
-                        Quantity = 5,
-                        Category = "Racket",
-                    },
-                    new Equipment
-                    {
-                        EquipmentName = "Table Tennis Racket",
-                        Quantity = 10,
-                        Category = "Racket",
-                    }
-                );
                 context.SaveChanges();
 
                /* // Look for any users.

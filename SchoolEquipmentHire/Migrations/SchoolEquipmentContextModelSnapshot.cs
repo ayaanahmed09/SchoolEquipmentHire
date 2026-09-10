@@ -306,6 +306,56 @@ namespace SchoolEquipmentHire.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Equipment");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Category = "Ball",
+                            EquipmentName = "Football",
+                            ImageUrl = "~/images/equipments/Football.png",
+                            Quantity = 5
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Category = "Ball",
+                            EquipmentName = "Basketball",
+                            ImageUrl = "~/images/equipments/Basketball.png",
+                            Quantity = 10
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Category = "Racket",
+                            EquipmentName = "Table Tennis Racket",
+                            ImageUrl = "~/images/equipments/TableTennisRacket.png",
+                            Quantity = 10
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Category = "Ball",
+                            EquipmentName = "Tennis Ball",
+                            ImageUrl = "~/images/equipments/TennisBall.png",
+                            Quantity = 20
+                        },
+                        new
+                        {
+                            ID = 5,
+                            Category = "Racket",
+                            EquipmentName = "Badminton Racket",
+                            ImageUrl = "~/images/equipments/BadmintonRacket.png",
+                            Quantity = 5
+                        },
+                        new
+                        {
+                            ID = 6,
+                            Category = "Other",
+                            EquipmentName = "Cone",
+                            ImageUrl = "~/images/equipments/Cone.png",
+                            Quantity = 15
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
