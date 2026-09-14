@@ -176,7 +176,10 @@ namespace SchoolEquipmentHire.Controllers
                 return NotFound();
 
             if (equipment.Quantity <= 0)
-                return BadRequest("No equipment available to book.");
+            {
+                TempData["ErrorMessage"] = "Equipment is fully booked.";
+                return RedirectToAction("Details", new { id = id });
+            }
 
             // Reduce quantity
             equipment.Quantity -= 1;

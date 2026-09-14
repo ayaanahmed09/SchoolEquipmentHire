@@ -10,8 +10,14 @@
     <p><strong>Available:</strong> @Model.Quantity</p>
 
     <form asp-action="Book" asp-route-id="@Model.ID">
-        <button type="submit" class="book-btn">Book Equipment</button>
+        <button type="submit" class="book-btn" @(Model.Quantity <= 0 ? "disabled=\"disabled\"" : "")>Book Equipment</button>
     </form>
+
+    @* Show message below the (possibly disabled) button when equipment is fully booked *@
+    @if (Model.Quantity <= 0 || TempData["ErrorMessage"] != null)
+    {
+        <div class="error-message">Equipment is fully booked.</div>
+    }
 
     <a asp-action="Index" class="back-btn">Back to Equipments</a>
 </div>
@@ -36,4 +42,14 @@
         .back-btn:hover {
             background: #0069d9;
         }
+
+    .error-message {
+        color: #a94442; /* bootstrap danger text color */
+        background: #f2dede;
+        border: 1px solid #ebccd1;
+        padding: 10px 12px;
+        border-radius: 4px;
+        margin-top: 12px;
+        font-weight: 600;
+    }
 </style>
