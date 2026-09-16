@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SchoolEquipmentHire.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace SchoolEquipmentHire.Controllers
 {
@@ -23,6 +24,7 @@ namespace SchoolEquipmentHire.Controllers
         {
             var bookings = await _context.Booking
         .Include(b => b.Equipment)
+        .Include(b => b.User)
         .ToListAsync();
 
             foreach (var b in bookings)
@@ -184,5 +186,39 @@ namespace SchoolEquipmentHire.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Book(int id)
+        {
+            var equipment = await _context.Equipment.FindAsync(id);
+
+            if (equipment == null)
+                return NotFound();
+
+            if (equipment.Quantity <= 0)
+                return BadRequest("No equipment available to book.");
+
+            // Reduce quantity
+            equipment.Quantity -= 1;
+
+            // Create booking record
+            var booking = new Booking
+            {
+                BookingDate = DateTime.Now,
+                ReturnDate = DateTime.Now.AddDays(3), // or user input
+                Status = "Pending",
+                EquipmentID = equipment.ID,
+                UserID = User.FindFirstValue(ClaimTypes.NameIdentifier)
+            };
+
+            _context.Booking.Add(booking);
+
+            await _context.SaveChangesAsync();
+
+            // Redirect to Bookings page
+            return View(booking);
+        }
+
+
     }
 }

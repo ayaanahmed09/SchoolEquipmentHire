@@ -76,3 +76,75 @@ body {
     .status-badge.overdue {
         background-color: #dc3545;
     }
+/* Booking Table Styling */
+.booking-table th, .booking-table td {
+    vertical-align: middle;
+    padding: 12px;
+}
+
+/* Status Badges */
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #fff;
+    font-weight: 500;
+    display: inline-block;
+    text-transform: capitalize;
+}
+
+    .status-badge.approved {
+        background-color: #28a745; /* Green */
+    }
+
+    .status-badge.pending {
+        background-color: #ffc107; /* Yellow */
+        color: #000;
+    }
+
+    .status-badge.returned {
+        background-color: #17a2b8; /* Teal */
+    }
+
+    .status-badge.overdue {
+        background-color: #dc3545; /* Red */
+    }
+
+/* Equipment Details Page */
+.details-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.equipment-image {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    display: inline-block;
+    margin-top: 20px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+    .back-btn:hover {
+        text-decoration: underline;
+    }
+
+/* Error Message */
+.error-message {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
