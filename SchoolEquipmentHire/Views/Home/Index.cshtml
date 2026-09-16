@@ -27,38 +27,91 @@
     }
     else
     {
-        <div class="home-container text-center">
-            <h1 class="main-title">Hire Equipment</h1>
+        <div style="max-width: 900px; margin: 40px auto; font-family: Arial, sans-serif;">
 
-            <form id="searchForm" asp-controller="Equipments" asp-action="Equipment" method="get" class="search-bar">
-                <span class="search-icon"><i class="fas fa-search"></i></span>
-                <input type="text" name="searchString" placeholder="Search Equipment" />
-                <button type="submit" class="search-btn">Search</button>
-            </form>
+            <!-- HERO SECTION -->
+            <div style="display: flex; align-items: center; gap: 25px; margin-bottom: 40px;">
+                <div style="
+                width: 120px;
+                height: 120px;
+                background: #e5e5e5;
+                border-radius: 50%;
+                "></div>
+
+                <div>
+                    <h2 style="margin: 0; font-size: 28px;">Welcome, Student!</h2>
+                    <p style="margin: 5px 0 20px; font-size: 16px; color: #555;">
+                        Borrow sports equipments easily and responsibly
+                    </p>
+
+                    <a href="/Equipment/Index"
+                       style="
+                        display: inline-block;
+                        background: black;
+                        color: white;
+                        padding: 12px 22px;
+                        border-radius: 6px;
+                        text-decoration: none;
+                        font-weight: bold;
+                        ">
+                        Request Equipment
+                    </a>
+                </div>
             </div>
 
-            <!-- Bottom Buttons -->
-            <div class="bottom-buttons">
-                <div class="button-card">
-                    <h3>ALL EQUIPMENT</h3>
-                    <a asp-controller="EquipmentItems" asp-action="AllEquipment">
-                        <img class="card-img-1" src="~/images/All Equipment.png" alt="All Equipment" />
-                    </a>
-                </div>
-                <div class="button-card">
-                    <h3>YOUR SPORT</h3>
-                    <a asp-controller="EquipmentItems" asp-action="AllEquipment" asp-route-favourite="true">
-                        <img class="card-img-2" src="~/images/ProfilePicture.png" alt="Sports" />
+            <!-- QUICK OVERVIEW -->
+            <h3 style="margin-bottom: 20px; font-size: 22px;">Quick Overview</h3>
 
-                    </a>
-                </div>
-                <div class="button-card">
-                    <h3>HIRE IT AGAIN</h3>
-                    <a asp-controller="EquipmentItems" asp-action="AllEquipment" asp-route-hireAgain="true">
-                        <img class="card-img-3" src="~/images/Hire It Again.png" alt="Hire Again" />
-                    </a>
-                </div>
+            <div style="display: flex; gap: 20px;">
+
+                <!-- CARD 1 -->
+                <a href="/Equipment/Index" style="
+                    flex: 1;
+                    background: black;
+                    color: white;
+                    padding: 25px;
+                    border-radius: 10px;
+                    text-decoration: none;
+                    text-align: center;
+                    font-size: 18px;
+                    font-weight: bold;
+                    ">
+                    Available Equipments
+                </a>
+
+                <!-- CARD 2 -->
+                <a href="/Bookings/MyBookings" style="
+                    flex: 1;
+                    background: black;
+                    color: white;
+                    padding: 25px;
+                    border-radius: 10px;
+                    text-decoration: none;
+                    text-align: center;
+                    font-size: 18px;
+                    font-weight: bold;
+                    ">
+                    My Bookings
+                </a>
+
+                <!-- CARD 3 -->
+                <a href="/Equipment/MyEquipments" style="
+                    flex: 1;
+                    background: black;
+                    color: white;
+                    padding: 25px;
+                    border-radius: 10px;
+                    text-decoration: none;
+                    text-align: center;
+                    font-size: 18px;
+                    font-weight: bold;
+                    ">
+                    My Equipments
+                </a>
+
             </div>
+
+        </div>
     }
 </div>
 
