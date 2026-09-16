@@ -47,3 +47,32 @@ body {
     background-color: #000000;
     width: 100%;
 }
+
+.booking-table th, .booking-table td {
+    vertical-align: middle;
+}
+
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #fff;
+    font-weight: 500;
+}
+
+    .status-badge.approved {
+        background-color: #28a745;
+    }
+
+    .status-badge.pending {
+        background-color: #ffc107;
+        color: #000;
+    }
+
+    .status-badge.returned {
+        background-color: #17a2b8;
+    }
+
+    .status-badge.overdue {
+        background-color: #dc3545;
+    }

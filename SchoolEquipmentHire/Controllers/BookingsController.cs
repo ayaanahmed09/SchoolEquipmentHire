@@ -21,7 +21,23 @@ namespace SchoolEquipmentHire.Controllers
         // GET: Bookings
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Booking.ToListAsync());
+            var bookings = await _context.Booking
+        .Include(b => b.Equipment)
+        .ToListAsync();
+
+            foreach (var b in bookings)
+            {
+                if (b.Status != "Returned") // Don't override returned bookings
+                {
+                    if (b.ReturnDate < DateTime.Now)
+                        b.Status = "Overdue";
+                    else if (b.Status == "Pending")
+                        b.Status = "Approved"; // Example logic
+                }
+            }
+
+            await _context.SaveChangesAsync();
+            return View(bookings);
         }
 
         // GET: Bookings/Details/5
@@ -57,6 +73,9 @@ namespace SchoolEquipmentHire.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Auto status when booking is created
+                booking.Status = "Pending";   // Default status
+
                 _context.Add(booking);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -151,6 +170,19 @@ namespace SchoolEquipmentHire.Controllers
         private bool BookingExists(int id)
         {
             return _context.Booking.Any(e => e.BookingID == id);
+        }
+
+        public async Task<IActionResult> MarkReturned(int id)
+        {
+            var booking = await _context.Booking.FindAsync(id);
+
+            if (booking == null)
+                return NotFound();
+
+            booking.Status = "Returned";
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
