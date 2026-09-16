@@ -11,5 +11,6 @@ namespace SchoolEquipmentHire.Models
         public string EquipmentName { get; set; }
         public int Quantity { get; set; }
         public string? ImageUrl { get; set; }
+        public ICollection<Booking>? Booking { get; set; }
     }
 }

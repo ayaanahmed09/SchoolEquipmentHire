@@ -23,7 +23,7 @@ namespace SchoolEquipmentHire.Models
         [DataType(DataType.Date)]
         public DateTime ReturnDate { get; set; }
 
-        public Equipment Equipment { get; set; }
+        public Equipment? Equipment { get; set; }
 
         public string Status { get; set; } // Approved, Pending, Rejected, Overdue, Returned
     }
