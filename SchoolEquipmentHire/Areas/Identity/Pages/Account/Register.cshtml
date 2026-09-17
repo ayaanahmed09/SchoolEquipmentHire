@@ -53,7 +53,7 @@
             </p>
 
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-
+            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="mb-3">
                 <input asp-for="Input.FirstName"
                        class="form-control"

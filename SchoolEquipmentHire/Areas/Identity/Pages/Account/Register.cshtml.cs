@@ -131,8 +131,12 @@ public class RegisterModel : PageModel
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+            user.FirstName = Input.FirstName;
+            user.LastName = Input.LastName;
+            user.YearLevel = Input.YearLevel;
+            user.Role = Enum.Parse<RoleType>(Input.Role);
 
-                await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
+            await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
 
