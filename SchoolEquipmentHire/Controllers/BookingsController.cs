@@ -196,27 +196,26 @@ namespace SchoolEquipmentHire.Controllers
                 return NotFound();
 
             if (equipment.Quantity <= 0)
-                return BadRequest("No equipment available to book.");
+            {
+                TempData["ErrorMessage"] = "Equipment is fully booked.";
+                return RedirectToAction("Details", new { id });
+            }
 
-            // Reduce quantity
             equipment.Quantity -= 1;
 
-            // Create booking record
             var booking = new Booking
             {
                 BookingDate = DateTime.Now,
-                ReturnDate = DateTime.Now.AddDays(3), // or user input
+                ReturnDate = DateTime.Now.AddDays(3),
                 Status = "Pending",
                 EquipmentID = equipment.ID,
-                UserID = User.FindFirstValue(ClaimTypes.NameIdentifier)
+                UserID = User.FindFirstValue(ClaimTypes.NameIdentifier) // REQUIRED
             };
 
             _context.Booking.Add(booking);
-
             await _context.SaveChangesAsync();
 
-            // Redirect to Bookings page
-            return View(booking);
+            return RedirectToAction("Index", "Bookings");
         }
 
 
