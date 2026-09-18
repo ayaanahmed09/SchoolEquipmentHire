@@ -10,6 +10,7 @@
 <div>
     @if (!SignInManager.IsSignedIn(User))
     {
+        <!-- NOT SIGNED IN UI -->
         <div class="welcome-container">
             <h1 class="welcome-title">Welcome Student</h1>
 
@@ -27,85 +28,31 @@
     }
     else
     {
-        <div style="max-width: 900px; margin: 40px auto; font-family: Arial, sans-serif;">
+        <!-- SIGNED IN UI -->
+        <div class="student-dashboard">
 
-            <!-- HERO SECTION -->
-            <div style="display: flex; align-items: center; gap: 25px; margin-bottom: 40px;">
-                <div style="
-                width: 120px;
-                height: 120px;
-                background: #e5e5e5;
-                border-radius: 50%;
-                "></div>
+            <!-- Header Rectangle -->
+            <div class="dashboard-header">
+                <h2>Welcome, Student!</h2>
+                <p>Borrow sports equipment easily and responsibly.</p>
 
-                <div>
-                    <h2 style="margin: 0; font-size: 28px;">Welcome, Student!</h2>
-                    <p style="margin: 5px 0 20px; font-size: 16px; color: #555;">
-                        Borrow sports equipments easily and responsibly
-                    </p>
-
-                    <a href="/Equipment/Index"
-                       style="
-                        display: inline-block;
-                        background: black;
-                        color: white;
-                        padding: 12px 22px;
-                        border-radius: 6px;
-                        text-decoration: none;
-                        font-weight: bold;
-                        ">
-                        Request Equipment
-                    </a>
-                </div>
+                <a href="/Equipment/Index" class="request-btn">
+                    Request Equipment
+                </a>
             </div>
 
-            <!-- QUICK OVERVIEW -->
-            <h3 style="margin-bottom: 20px; font-size: 22px;">Quick Overview</h3>
+            <!-- Quick Overview -->
+            <div class="dashboard-boxes">
 
-            <div style="display: flex; gap: 20px;">
-
-                <!-- CARD 1 -->
-                <a href="/Equipment/Index" style="
-                    flex: 1;
-                    background: black;
-                    color: white;
-                    padding: 25px;
-                    border-radius: 10px;
-                    text-decoration: none;
-                    text-align: center;
-                    font-size: 18px;
-                    font-weight: bold;
-                    ">
+                <a href="/Equipment/Index" class="dash-box">
                     Available Equipments
                 </a>
 
-                <!-- CARD 2 -->
-                <a href="/Bookings/MyBookings" style="
-                    flex: 1;
-                    background: black;
-                    color: white;
-                    padding: 25px;
-                    border-radius: 10px;
-                    text-decoration: none;
-                    text-align: center;
-                    font-size: 18px;
-                    font-weight: bold;
-                    ">
+                <a href="/Bookings/MyBookings" class="dash-box">
                     My Bookings
                 </a>
 
-                <!-- CARD 3 -->
-                <a href="/Equipment/MyEquipments" style="
-                    flex: 1;
-                    background: black;
-                    color: white;
-                    padding: 25px;
-                    border-radius: 10px;
-                    text-decoration: none;
-                    text-align: center;
-                    font-size: 18px;
-                    font-weight: bold;
-                    ">
+                <a href="/Equipment/MyEquipments" class="dash-box">
                     My Equipments
                 </a>
 
@@ -115,13 +62,8 @@
     }
 </div>
 
-                   
-    @{
-    ViewData["Title"] = "Home";
-}
-
 <style>
-    /*SIGN UP PAGE*/
+    /* SIGN UP PAGE */
     body {
         font-family: 'Creato Display', 'Montserrat', sans-serif;
         background-color: #fff;
@@ -136,12 +78,6 @@
         align-items: center;
         justify-content: center;
         min-height: calc(100vh - 170px);
-        position: relative;
-    }
-
-    .school-logo {
-        width: 8rem;
-        height: auto;
     }
 
     .welcome-title {
@@ -150,188 +86,103 @@
         font-weight: 750;
     }
 
-    .welcome-subtitle {
-        color: black; 
-        font-size: 1.7rem;
-        font-style: italic;
-        margin-bottom: 0px;
-    }
-
     .btn-container {
         border-radius: 20px;
         width: 500px;
-        margin: 1rem auto; 
-        font-size: 1.1rem;
-        color: black;
-        text-align: center;
+        margin: 1rem auto;
         box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
         overflow: hidden;
     }
 
-    /* Ensure the sign up / login groups align and center their contents */
     .btn-top, .btn-bottom {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-    }
-
-    .btn-container p {
-        margin: 0 0 15px; /* adds spacing above buttons */
-        font-size: 1.1rem;
-        font-style: italic;
-        color: black;
-        text-align: center;
-    }
-
-    .btn-container a {
-        display: inline-block; 
-        min-width: 180px;
-        padding: 18px 20px;
-        border-radius: 35px;
-        font-size: 1.2rem;
-        font-weight: bold;
-        text-decoration: none;
-        color: #000;
-        transition: all 0.2s ease-in-out;
-        text-align: center;
-    }
-
-    .btn-top {
-        background: #cccccc;
         padding: 40px 20px;
     }
 
-    .btn-bottom {
-        background: #e6e6e6;
-        padding: 40px 20px;
-    }
-
-    .btn-container .signup-btn {
-        background: #e6e6e6;
-    }
-
-    .btn-container .signup-btn:hover {
+    .signup-btn:hover {
         background: #d6d6d6;
     }
 
-    .btn-container .login-btn {
-        background: #cccccc;
-    }
-
-    .btn-container .login-btn:hover {
+    .login-btn:hover {
         background: #bcbcbc;
     }
 
-    /*HOME PAGE*/
+    /* STUDENT DASHBOARD */
+    .student-dashboard {
+        max-width: 700px;
+        margin: 0 auto; /* Centers horizontally */
+        padding-top: 60px;
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
 
-.home-container {
-    display: flex;
-    flex-direction: column;
-}
+    .dashboard-header {
+        background: #f5f5f5;
+        padding: 35px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
 
-.main-title {
-    font-size: 3rem;
-    font-weight: 800;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-}
+        .dashboard-header h2 {
+            margin-bottom: 10px;
+            font-size: 28px;
+            font-weight: 700;
+        }
 
-.search-bar {
-    display: flex;
-    align-items: center;
-    background: #f2f2f2;
-    border-radius: 40px;
-    padding: 12px 15px;
-    width: 35%;
-    margin: 0 auto;
-}
+        .dashboard-header p {
+            margin-bottom: 20px;
+            color: #555;
+            font-size: 16px;
+        }
 
-.search-bar .search-icon {
-    font-size: 1.2rem;
-    color: #666;
-    margin-right: 10px;
-}
+    .request-btn {
+        background: #000;
+        color: #fff;
+        padding: 12px 25px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-block;
+        transition: transform .2s ease, background .2s ease;
+    }
 
-.search-bar input {
-    border: none;
-    outline: none;
-    flex: 1;
-    background: transparent;
-    font-size: 1.1rem;
-    padding: 5px;
-}
+        .request-btn:hover {
+            background: #222;
+            transform: translateY(-5px);
+        }
 
-.search-bar .search-btn {
-    background: #333;
-    color: #fff;
-    border: none;
-    padding: 8px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 1rem;
-}
+    .dashboard-boxes {
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        gap: 15px;
+        margin-top: 20px;
+    }
 
-.search-bar .search-btn:hover {
-    background: #555;
-}
+    .dash-box {
+        background: #fff;
+        color: #000;
+        padding: 40px 20px; /* More height */
+        border-radius: 10px;
+        text-decoration: none;
+        font-size: 20px;
+        font-weight: 600;
+        flex: 1; /* Equal width */
+        height: 300px; /* Makes them tall vertical rectangles */
+        display: flex; /* Center text vertically */
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        transition: transform .2s ease, background .2s ease;
+    }
 
-.bottom-buttons {
-    width: 45%;
-    margin: 2rem auto;
-    margin-bottom: 0; 
-    display: flex;
-    justify-content: space-between;
-    gap: 40px;
-}
+        .dash-box:hover {
+            background: #f5f5f5;
+            transform: translateY(-5px);
+        }
 
-.button-card {
-    flex: 1;
-    aspect-ratio: 1 / 1;
-    background: #cccccc;
-    border-radius: 15px;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
-
-    display: flex;
-    flex-direction: column; /* Stack title and image vertically */
-    align-items: center; /* Center horizontally */
-    justify-content: space-between; /* Even top & bottom spacing */
-    padding: 20px; /* Add inner spacing */
-    text-align: center;
-}
-
-.button-card h3 {
-    font-weight: 650;
-    color: #7d7d7d;
-    font-size: 1.7rem;
-    margin: 0;
-}
-
-.button-card a {
-    display: flex;
-    flex: 1; /* Take up remaining space */
-    align-items: center; /* Center image vertically */
-    justify-content: center; /* Center image horizontally */
-}
-
-
-.card-img-1{
-    width: 70%;
-    height: auto;
-    object-fit: contain;
-}
-.card-img-2{
-    width: 70%;
-    height: auto;
-    object-fit: contain;
-}
-.card-img-3{
-    width: 70%;
-    height: auto;
-    object-fit: contain;
-}
 </style>
 
-<script src="~/js/carousel1.js"></script>  
-<link rel="stylesheet" href="~/css/carousel.css"/>
+<script src="~/js/carousel1.js"></script>
+<link rel="stylesheet" href="~/css/carousel.css" />
