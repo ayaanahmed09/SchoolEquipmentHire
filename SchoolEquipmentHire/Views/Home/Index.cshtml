@@ -10,21 +10,22 @@
 <div>
     @if (!SignInManager.IsSignedIn(User))
     {
-        <!-- NOT SIGNED IN UI -->
-        <div class="welcome-container">
-            <h1 class="welcome-title">Welcome Student</h1>
 
-            <div class="btn-container">
-                <div class="btn-top">
-                    <p>Don't have an account?</p>
-                    <a asp-area="Identity" asp-page="/Account/Register" class="signup-btn">SIGN UP</a>
-                </div>
-                <div class="btn-bottom">
-                    <p>Already have an account?</p>
-                    <a asp-area="Identity" asp-page="/Account/Login" class="login-btn">LOGIN</a>
-                </div>
-            </div>
+<div class="welcome-container">
+    <h1 class="welcome-title">WELCOME!</h1>
+
+    <div class="btn-container">
+        <div class="btn-top">
+            <p>dont have an account?</p>
+            <a asp-area="Identity" asp-page="/Account/Register" class="signup-btn">SIGN UP</a>
         </div>
+        <div class="btn-bottom">
+            <p>already have an account?</p>
+            <a asp-area="Identity" asp-page="/Account/Login" class="login-btn">LOGIN</a>
+        </div>
+    </div>
+</div>
+
     }
     else
     {
@@ -63,7 +64,7 @@
 </div>
 
 <style>
-    /* SIGN UP PAGE */
+   /*SIGN UP PAGE*/
     body {
         font-family: 'Creato Display', 'Montserrat', sans-serif;
         background-color: #fff;
@@ -77,7 +78,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        min-height: calc(100vh - 170px);
+        position: relative;
     }
 
     .welcome-title {
@@ -86,23 +87,79 @@
         font-weight: 750;
     }
 
+    .welcome-subtitle {
+        color: black; 
+        font-size: 1.7rem;
+        font-style: italic;
+        margin-bottom: 0px;
+    }
+
+    .popular-text{
+        font-size: 1.2rem; 
+        font-weight: 500;
+        font-style: italic;
+        margin-top: 1rem;
+    }
+
     .btn-container {
         border-radius: 20px;
         width: 500px;
-        margin: 1rem auto;
+        margin: 1rem auto; 
+        font-size: 1.1rem;
+        color: black;
+        text-align: center;
         box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
         overflow: hidden;
     }
 
-    .btn-top, .btn-bottom {
+    .btn-container p {
+        margin: 0 0 15px; /* adds spacing above buttons */
+        font-size: 1.1rem;
+        font-style: italic;
+        color: black;
+        text-align: center;
+    }
+
+    .btn-container a {
+        display: inline-block; 
+        min-width: 180px;
+        padding: 18px 20px;
+        border-radius: 35px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        text-decoration: none;
+        color: #000;
+        transition: all 0.2s ease-in-out;
+        text-align: center;
+    }
+
+    .btn-top {
+        background: #cccccc;
         padding: 40px 20px;
     }
 
-    .signup-btn:hover {
+    .btn-top:hover {
+        transform: translateY(-3px);
+    }
+
+    .btn-bottom {
+        background: #e6e6e6;
+        padding: 40px 20px;
+    }
+
+    .btn-container .signup-btn {
+        background: #e6e6e6;
+    }
+
+    .btn-container .signup-btn:hover {
         background: #d6d6d6;
     }
 
-    .login-btn:hover {
+    .btn-container .login-btn {
+        background: #cccccc;
+    }
+
+    .btn-container .login-btn:hover {
         background: #bcbcbc;
     }
 
