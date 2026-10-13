@@ -29,12 +29,12 @@ namespace SchoolEquipmentHire.Controllers
 
             foreach (var b in bookings)
             {
-                if (b.Status != "Returned") // Don't override returned bookings
+                if (b.Status != "Returned" && b.Status != "Available")
                 {
                     if (b.ReturnDate < DateTime.Now)
                         b.Status = "Overdue";
                     else if (b.Status == "Pending")
-                        b.Status = "Approved"; // Example logic
+                        b.Status = "Approved";
                 }
             }
 
@@ -174,18 +174,38 @@ namespace SchoolEquipmentHire.Controllers
             return _context.Booking.Any(e => e.BookingID == id);
         }
 
+        [HttpPost]
         public async Task<IActionResult> MarkReturned(int id)
         {
-            var booking = await _context.Booking.FindAsync(id);
+            var booking = await _context.Booking
+                .Include(b => b.Equipment)
+                .FirstOrDefaultAsync(b => b.BookingID == id);
 
             if (booking == null)
+            {
                 return NotFound();
+            }
 
-            booking.Status = "Returned";
+            // Prevent multiple clicks
+            if (booking.Status == "Available")
+            {
+                TempData["Success"] = "Equipment has already been returned.";
+                return RedirectToAction(nameof(Index));
+            }
+
+            booking.Status = "Available";
+
+            // Increase stock by 1
+            booking.Equipment.Quantity++;
+
             await _context.SaveChangesAsync();
+
+            TempData["Success"] = "Equipment marked as returned.";
 
             return RedirectToAction(nameof(Index));
         }
+
+
 
         [HttpPost]
         public async Task<IActionResult> Book(int id)

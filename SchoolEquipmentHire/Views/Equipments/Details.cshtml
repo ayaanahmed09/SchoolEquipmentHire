@@ -9,7 +9,7 @@
     <p><strong>Category:</strong> @Model.Category</p>
     <p><strong>Available:</strong> @Model.Quantity</p>
 
-<form asp-controller="Bookings" asp-action="Book" method="post">
+<form asp-controller="Equipments" asp-action="Book" method="post">
     <input type="hidden" name="id" value="@Model.ID" />
     <button type="submit" class="btn btn-primary">Book Equipment</button>
 </form>
