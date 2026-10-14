@@ -9,10 +9,30 @@
     <p><strong>Category:</strong> @Model.Category</p>
     <p><strong>Available:</strong> @Model.Quantity</p>
 
-<form asp-controller="Equipments" asp-action="Book" method="post">
-    <input type="hidden" name="id" value="@Model.ID" />
-    <button type="submit" class="btn btn-primary">Book Equipment</button>
-</form>
+    <form asp-controller="Equipments"
+          asp-action="Book"
+          method="post">
+
+        <input type="hidden" name="id" value="@Model.ID" />
+
+        <div class="mb-3">
+            <label class="form-label">
+                Quantity to Book
+            </label>
+
+            <select name="quantity" class="form-select">
+                @for (int i = 1; i <= Math.Min(10, Model.Quantity); i++)
+                {
+                    <option value="@i">@i</option>
+                }
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Book Equipment
+        </button>
+
+    </form>
 
     @* Show message below the (possibly disabled) button when equipment is fully booked *@
     @if (Model.Quantity <= 0 || TempData["ErrorMessage"] != null)

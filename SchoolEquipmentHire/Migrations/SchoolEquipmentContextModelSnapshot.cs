@@ -251,6 +251,9 @@ namespace SchoolEquipmentHire.Migrations
                     b.Property<int>("EquipmentID")
                         .HasColumnType("int");
 
+                    b.Property<int>("QuantityBooked")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("ReturnDate")
                         .HasColumnType("datetime2");
 

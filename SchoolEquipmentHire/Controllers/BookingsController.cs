@@ -29,12 +29,14 @@ namespace SchoolEquipmentHire.Controllers
 
             foreach (var b in bookings)
             {
-                if (b.Status != "Returned" && b.Status != "Available")
+                if (b.Status != "Available"
+                    && b.Status != "Rejected"
+                    && b.Status != "Approved")
                 {
                     if (b.ReturnDate < DateTime.Now)
+                    {
                         b.Status = "Overdue";
-                    else if (b.Status == "Pending")
-                        b.Status = "Approved";
+                    }
                 }
             }
 
@@ -80,6 +82,7 @@ namespace SchoolEquipmentHire.Controllers
 
                 _context.Add(booking);
                 await _context.SaveChangesAsync();
+                TempData["BookingSuccess"] = "Your booking request has been submitted successfully.";
                 return RedirectToAction(nameof(Index));
             }
             return View(booking);

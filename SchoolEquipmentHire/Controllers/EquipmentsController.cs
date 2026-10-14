@@ -55,6 +55,8 @@ namespace SchoolEquipmentHire.Controllers
             {
                 _context.Add(equipment);
                 await _context.SaveChangesAsync();
+                TempData["BookingSuccess"] =
+    "Head to the Bookings page to view your booking details.";
                 return RedirectToAction(nameof(Index));
             }
             return View(equipment);
@@ -169,21 +171,23 @@ namespace SchoolEquipmentHire.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Book(int id)
+        public async Task<IActionResult> Book(int id, int quantity)
         {
             var equipment = await _context.Equipment.FindAsync(id);
 
             if (equipment == null)
                 return NotFound();
 
-            if (equipment.Quantity <= 0)
+            if (equipment.Quantity < quantity)
             {
-                TempData["ErrorMessage"] = "Equipment is fully booked.";
-                return RedirectToAction("Details", new { id = id });
+                TempData["ErrorMessage"] =
+                    $"Only {equipment.Quantity} item(s) available.";
+
+                return RedirectToAction("Details", new { id });
             }
 
             // Reduce quantity
-            equipment.Quantity -= 1;
+            equipment.Quantity -= quantity;
 
             var booking = new Booking
             {

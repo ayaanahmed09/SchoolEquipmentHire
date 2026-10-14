@@ -1,7 +1,27 @@
 ﻿@model IEnumerable<SchoolEquipmentHire.Models.Equipment>
 
+<h3>Select your equipment</h3>
+
 <div class="equipment page">
-    
+
+    @if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+
+        <a asp-controller="Bookings"
+           asp-action="Index"
+           class="btn btn-sm btn-primary ms-3">
+            View Bookings
+        </a>
+
+        <button type="button"
+                class="btn-close"
+                data-bs-dismiss="alert">
+        </button>
+    </div>
+}
+
     <div class="top-row">
         <input type="text" id="searchBox" placeholder="Search equipments..." class="search-input"/>
 

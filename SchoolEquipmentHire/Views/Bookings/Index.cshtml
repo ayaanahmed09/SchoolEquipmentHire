@@ -27,8 +27,7 @@
                 <tr>
                     <td>@item.BookingID</td>
                     <td>@item.Equipment?.EquipmentName</td>
-                    <td>@item.Equipment.Quantity</td>
-
+                    <td>@item.QuantityBooked</td>
                     <!-- User / email -->
                     <td>@item.User?.Email</td>
 
@@ -41,6 +40,26 @@
 
 
                     <td>                 
+                        @if (item.Status == "Pending")
+                        {
+                            <form asp-action="Approve"
+                                  asp-route-id="@item.BookingID"
+                                  method="post"
+                                  class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-success">
+                                    Approve
+                                </button>
+                            </form>
+
+                            <form asp-action="Reject"
+                                  asp-route-id="@item.BookingID"
+                                  method="post"
+                                  class="d-inline">
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    Reject
+                                </button>
+                            </form>
+                        }
 
                         <a asp-action="Edit"
                            asp-route-id="@item.BookingID"
@@ -60,7 +79,7 @@
                                 Available
                             </button>
                         }
-                        else
+                        else if (item.Status == "Approved")
                         {
                             <form asp-action="MarkReturned"
                                   asp-route-id="@item.BookingID"
