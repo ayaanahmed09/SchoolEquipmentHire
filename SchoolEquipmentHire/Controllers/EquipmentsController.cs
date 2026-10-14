@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SchoolEquipmentHire.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace SchoolEquipmentHire.Controllers
 {
@@ -184,6 +185,16 @@ namespace SchoolEquipmentHire.Controllers
             // Reduce quantity
             equipment.Quantity -= 1;
 
+            var booking = new Booking
+            {
+                BookingDate = DateTime.Now,
+                ReturnDate = DateTime.Now.AddDays(3),
+                Status = "Pending",
+                EquipmentID = equipment.ID,
+                UserID = User.FindFirstValue(ClaimTypes.NameIdentifier) // REQUIRED
+            };
+
+            _context.Booking.Add(booking);
             await _context.SaveChangesAsync();
 
             // Redirect back to details page

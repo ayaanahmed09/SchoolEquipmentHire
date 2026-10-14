@@ -238,6 +238,44 @@ namespace SchoolEquipmentHire.Controllers
             return RedirectToAction("Index", "Bookings");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Approve(int id)
+        {
+            var booking = await _context.Booking
+                .FirstOrDefaultAsync(b => b.BookingID == id);
 
+            if (booking == null)
+                return NotFound();
+
+            booking.Status = "Approved";
+
+            await _context.SaveChangesAsync();
+
+            TempData["Success"] = "Booking approved.";
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Reject(int id)
+        {
+            var booking = await _context.Booking
+                .Include(b => b.Equipment)
+                .FirstOrDefaultAsync(b => b.BookingID == id);
+
+            if (booking == null)
+                return NotFound();
+
+            booking.Status = "Rejected";
+
+            // Return item to stock
+            booking.Equipment.Quantity++;
+
+            await _context.SaveChangesAsync();
+
+            TempData["Success"] = "Booking rejected.";
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
