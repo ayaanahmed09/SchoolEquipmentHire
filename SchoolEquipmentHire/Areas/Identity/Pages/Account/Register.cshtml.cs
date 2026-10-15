@@ -134,7 +134,8 @@ public class RegisterModel : PageModel
             user.FirstName = Input.FirstName;
             user.LastName = Input.LastName;
             user.YearLevel = Input.YearLevel;
-            user.Role = Enum.Parse<RoleType>(Input.Role);
+            // Always assign Student to public registrations
+            user.Role = RoleType.Student;
 
             await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
