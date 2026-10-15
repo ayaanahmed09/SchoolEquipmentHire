@@ -37,7 +37,7 @@
                 <h2>Welcome, Student!</h2>
                 <p>Borrow sports equipment easily and responsibly.</p>
 
-                <a href="/Equipment/Index" class="request-btn">
+                <a asp-controller="Equipments" asp-action="Index" class="request-btn">
                     Request Equipment
                 </a>
             </div>
@@ -45,15 +45,15 @@
             <!-- Quick Overview -->
             <div class="dashboard-boxes">
 
-                <a href="/Equipment/Index" class="dash-box">
+                <a asp-controller="Equipments" asp-action="Index" class="dash-box">
                     Available Equipments
                 </a>
 
-                <a href="/Bookings/MyBookings" class="dash-box">
+                <a asp-controller="Bookings" asp-action="Index" class="dash-box">
                     My Bookings
                 </a>
 
-                <a href="/Equipment/MyEquipments" class="dash-box">
+                <a asp-controller="Equipments" asp-action="Index" class="dash-box">
                     My Equipments
                 </a>
 
