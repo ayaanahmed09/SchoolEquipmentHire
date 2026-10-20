@@ -189,6 +189,14 @@ namespace SchoolEquipmentHire.Controllers
             if (equipment == null)
                 return NotFound();
 
+            // Validate quantity
+            if (quantity < 1 || quantity > equipment.Quantity)
+            {
+                TempData["ErrorMessage"] =
+                    "Please select a valid quantity.";
+
+                return RedirectToAction("Details", new { id });
+            }
 
             var now = DateTime.Now;
 
@@ -220,6 +228,7 @@ namespace SchoolEquipmentHire.Controllers
             {
                 BookingDate = bookingDate,
                 ReturnDate = returnDate,
+                Quantity = quantity,
                 Status = "Pending",
                 EquipmentID = equipment.ID,
                 UserID = User.FindFirstValue(ClaimTypes.NameIdentifier)

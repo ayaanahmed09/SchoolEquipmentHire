@@ -26,5 +26,7 @@ namespace SchoolEquipmentHire.Models
         public Equipment? Equipment { get; set; }
 
         public string Status { get; set; } // Approved, Pending, Rejected, Overdue, Returned
+
+        public int Quantity { get; set; } // Quantity of equipment booked
     }
 }
