@@ -1,10 +1,22 @@
-﻿@model SchoolEquipmentHire.Models.Equipment
+﻿
+@model SchoolEquipmentHire.Models.Equipment
 
 <div class="details-container">
 
     <h2>@Model.EquipmentName</h2>
 
-    <img src="@Model.ImageUrl" alt="@Model.EquipmentName" class="equipment-image" />
+    @if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+    <div class="image-container">
+        <img src="@Url.Content(Model.ImageUrl)"
+             alt="@Model.EquipmentName"
+             class="equipment-image" />
+    </div>
 
     <p><strong>Category:</strong> @Model.Category</p>
     <p><strong>Available:</strong> @Model.Quantity</p>
@@ -20,7 +32,9 @@
                 Quantity to Book
             </label>
 
-            <select name="quantity" class="form-select">
+            <select name="quantity"
+                    class="form-select"
+                    disabled="@(Model.Quantity <= 0)">
                 @for (int i = 1; i <= Math.Min(10, Model.Quantity); i++)
                 {
                     <option value="@i">@i</option>
@@ -28,49 +42,85 @@
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">
+        <button type="submit"
+                class="btn btn-primary"
+                disabled="@(Model.Quantity <= 0)">
             Book Equipment
         </button>
 
     </form>
 
-    @* Show message below the (possibly disabled) button when equipment is fully booked *@
     @if (Model.Quantity <= 0 || TempData["ErrorMessage"] != null)
     {
-        <div class="error-message">Equipment is fully booked.</div>
+        <div class="error-message">
+            @(TempData["ErrorMessage"] ?? "Equipment is fully booked.")
+        </div>
     }
 
-    <a asp-action="Index" class="back-btn">Back to Equipments</a>
+    <a asp-action="Index" class="back-btn">
+        Back to Equipments
+    </a>
 </div>
 
 <style>
     .details-container {
         max-width: 600px;
         margin: 40px auto;
+        padding: 0 20px;
         font-family: Arial, sans-serif;
     }
 
-    .back-btn {
-        display: inline-block;
-        margin-top: 20px;
-        padding: 10px 16px;
-        background: #007bff;
-        color: white;
-        border-radius: 6px;
-        text-decoration: none;
+    .image-container {
+        width: 100%;
+        height: 350px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f8f9fa;
+        border-radius: 12px;
+        overflow: hidden;
+        margin: 20px 0;
+        padding: 15px;
+        box-sizing: border-box;
     }
 
-        .back-btn:hover {
-            background: #0069d9;
-        }
+    .equipment-image {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    .back-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 16px;
+    background: #007bff;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    line-height: 1.5;
+}
+
+.back-btn:hover {
+    background: #0069d9;
+    color: white;
+}
 
     .error-message {
-        color: #a94442; /* bootstrap danger text color */
+        color: #a94442;
         background: #f2dede;
         border: 1px solid #ebccd1;
         padding: 10px 12px;
         border-radius: 4px;
         margin-top: 12px;
         font-weight: 600;
+    }
+
+    @@media (max-width: 576px) {
+        .image-container {
+            height: 260px;
+        }
     }
 </style>

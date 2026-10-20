@@ -208,7 +208,8 @@ namespace SchoolEquipmentHire.Controllers
             _context.Booking.Add(booking);
             await _context.SaveChangesAsync();
 
-            // Redirect back to details page
+            TempData["SuccessMessage"] = "Equipment successfully booked";
+
             return RedirectToAction("Details", new { id = id });
         }
     }
