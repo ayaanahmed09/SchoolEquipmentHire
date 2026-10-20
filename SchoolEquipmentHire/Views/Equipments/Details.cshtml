@@ -21,20 +21,20 @@
     <p><strong>Category:</strong> @Model.Category</p>
     <p><strong>Available:</strong> @Model.Quantity</p>
 
-    <form asp-controller="Equipments"
-          asp-action="Book"
-          method="post">
+    
 
-        <input type="hidden" name="id" value="@Model.ID" />
+<form asp-controller="Equipments"
+      asp-action="Book"
+      method="post">
 
-        <div class="mb-3">
+    <input type="hidden" name="id" value="@Model.ID" />
+
+<div class="mb-3">
             <label class="form-label">
                 Quantity to Book
             </label>
 
-            <select name="quantity"
-                    class="form-select"
-                    disabled="@(Model.Quantity <= 0)">
+            <select name="quantity" class="form-select">
                 @for (int i = 1; i <= Math.Min(10, Model.Quantity); i++)
                 {
                     <option value="@i">@i</option>
@@ -42,13 +42,71 @@
             </select>
         </div>
 
-        <button type="submit"
-                class="btn btn-primary"
-                disabled="@(Model.Quantity <= 0)">
-            Book Equipment
-        </button>
+<div class="mb-3">
+    <label class="form-label">Booking Date and Time</label>
+    <input type="datetime-local"
+           id="bookingDate"
+           name="bookingDate"
+           class="form-control"
+           min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")"
+           max="@DateTime.Now.AddDays(7).ToString("yyyy-MM-ddTHH:mm")"
+           value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")"
+           required />
+</div>
 
-    </form>
+<div class="mb-3">
+    <label class="form-label">Return Date and Time</label>
+    <input type="datetime-local"
+           id="returnDate"
+           name="returnDate"
+           class="form-control"
+           min="@DateTime.Now.AddMinutes(1).ToString("yyyy-MM-ddTHH:mm")"
+           max="@DateTime.Now.AddDays(7).ToString("yyyy-MM-ddTHH:mm")"
+           required />
+</div>
+
+<button type="submit" class="btn btn-primary"
+        disabled="@(Model.Quantity <= 0)">
+    Book Equipment
+</button>
+
+</form>
+
+<script>
+    const bookingInput = document.getElementById("bookingDate");
+    const returnInput = document.getElementById("returnDate");
+
+    function updateReturnLimits() {
+        if (!bookingInput.value) return;
+
+        const booking = new Date(bookingInput.value);
+        const minReturn = new Date(booking.getTime() + 60000);
+        const maxReturn = new Date(booking.getTime() + 7 * 24 * 60 * 60 * 1000);
+
+        function formatDate(date) {
+            const pad = n => String(n).padStart(2, "0");
+            return date.getFullYear() + "-" +
+                pad(date.getMonth() + 1) + "-" +
+                pad(date.getDate()) + "T" +
+                pad(date.getHours()) + ":" +
+                pad(date.getMinutes());
+        }
+
+        returnInput.min = formatDate(minReturn);
+        returnInput.max = formatDate(maxReturn);
+
+        if (returnInput.value &&
+            (new Date(returnInput.value) < minReturn ||
+             new Date(returnInput.value) > maxReturn)) {
+            returnInput.value = "";
+        }
+    }
+
+    bookingInput.addEventListener("change", updateReturnLimits);
+    updateReturnLimits();
+</script>
+
+
 
     @if (Model.Quantity <= 0 || TempData["ErrorMessage"] != null)
     {

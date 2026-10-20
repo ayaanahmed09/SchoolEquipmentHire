@@ -177,32 +177,52 @@ namespace SchoolEquipmentHire.Controllers
             return _context.Equipment.Any(e => e.ID == id);
         }
 
+
+
         [HttpPost]
-        public async Task<IActionResult> Book(int id, int quantity)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Book(
+            int id, int quantity, DateTime bookingDate, DateTime returnDate)
         {
             var equipment = await _context.Equipment.FindAsync(id);
 
             if (equipment == null)
                 return NotFound();
 
-            if (equipment.Quantity < quantity)
+
+            var now = DateTime.Now;
+
+            // Allow a small tolerance for the minute-based date picker
+            if (bookingDate < now.AddMinutes(-1) ||
+                bookingDate > now.AddDays(7))
+
+                if (returnDate <= bookingDate ||
+                returnDate > bookingDate.AddDays(7))
             {
                 TempData["ErrorMessage"] =
-                    $"Only {equipment.Quantity} item(s) available.";
+                    "The return date must be after the booking date and within 7 days.";
 
                 return RedirectToAction("Details", new { id });
             }
 
-            // Reduce quantity
+
+            if (quantity < 1 || equipment.Quantity < quantity)
+            {
+                TempData["ErrorMessage"] =
+                    $"Please choose a quantity between 1 and {equipment.Quantity}.";
+
+                return RedirectToAction("Details", new { id });
+            }
+
             equipment.Quantity -= quantity;
 
             var booking = new Booking
             {
-                BookingDate = DateTime.Now,
-                ReturnDate = DateTime.Now.AddDays(3),
+                BookingDate = bookingDate,
+                ReturnDate = returnDate,
                 Status = "Pending",
                 EquipmentID = equipment.ID,
-                UserID = User.FindFirstValue(ClaimTypes.NameIdentifier) // REQUIRED
+                UserID = User.FindFirstValue(ClaimTypes.NameIdentifier)
             };
 
             _context.Booking.Add(booking);
@@ -210,7 +230,7 @@ namespace SchoolEquipmentHire.Controllers
 
             TempData["SuccessMessage"] = "Equipment successfully booked";
 
-            return RedirectToAction("Details", new { id = id });
+            return RedirectToAction("Details", new { id });
         }
     }
 }
