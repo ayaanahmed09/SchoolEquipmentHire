@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SchoolEquipmentHire.Models;
@@ -178,6 +179,7 @@ namespace SchoolEquipmentHire.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> MarkReturned(int id)
         {
             var booking = await _context.Booking
@@ -242,6 +244,7 @@ namespace SchoolEquipmentHire.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Approve(int id)
         {
             var booking = await _context.Booking
@@ -260,6 +263,7 @@ namespace SchoolEquipmentHire.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Reject(int id)
         {
             var booking = await _context.Booking

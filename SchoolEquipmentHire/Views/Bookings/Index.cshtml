@@ -39,8 +39,10 @@
                     <td>@item.Status</td>
 
 
-                    <td>                 
-                        @if (item.Status == "Pending")
+                    <td>               
+                        @if (User.IsInRole("Admin"))
+                        {
+                            @if (item.Status == "Pending")
                         {
                             <form asp-action="Approve"
                                   asp-route-id="@item.BookingID"
@@ -90,6 +92,7 @@
                                     Mark Returned
                                 </button>
                             </form>
+                        }
                         }
                         
                     </td>

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SchoolEquipmentHire.Controllers
 {
@@ -39,6 +40,7 @@ namespace SchoolEquipmentHire.Controllers
         }
 
         // GET: Equipments/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -49,6 +51,7 @@ namespace SchoolEquipmentHire.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("ID,Category,EquipmentName,Quantity,ImageUrl")] Equipment equipment)
         {
             if (ModelState.IsValid)
@@ -63,6 +66,7 @@ namespace SchoolEquipmentHire.Controllers
         }
 
         // GET: Equipments/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -83,6 +87,7 @@ namespace SchoolEquipmentHire.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, [Bind("ID,Category,EquipmentName,Quantity,ImageUrl")] Equipment equipment)
         {
             if (id != equipment.ID)
@@ -133,6 +138,7 @@ namespace SchoolEquipmentHire.Controllers
         }
 
         // GET: Equipments/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -153,6 +159,7 @@ namespace SchoolEquipmentHire.Controllers
         // POST: Equipments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var equipment = await _context.Equipment.FindAsync(id);
