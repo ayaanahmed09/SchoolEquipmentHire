@@ -21,4 +21,10 @@
     <PackageReference Include="System.Security.Cryptography.Pkcs" Version="10.0.13" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Data\SQL SCRIPTS\Advanced\" />
+    <Folder Include="Data\SQL SCRIPTS\Complex\" />
+    <Folder Include="Data\SQL SCRIPTS\Simple\" />
+  </ItemGroup>
+
 </Project>
